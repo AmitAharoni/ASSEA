@@ -12,13 +12,19 @@ namespace ASSEA_Logic
      {
           public const int phy = 1;
           public const int ment = 2;
-          /// <summary>
-          /// save to file
-          /// </summary>
-          string userName;
-          DateTime mealFirst, mealSec, friendlyBreak;
-          eInterset interset;
-          eNotificationsLevel notificationsLevel;
+          
+        public User(string username, DateTime lunch, DateTime dinner, DateTime friendly, eInterset interest, eNotificationsLevel notification)
+        {
+            string userName = username;
+            string mealFirst = lunch.ToLongTimeString();
+            string mealSec = dinner.ToLongTimeString();
+            string friendlyBreak = friendly.ToLongTimeString();
+            eInterset interset = interest;
+            eNotificationsLevel notificationsLevel = notification;
+
+            Thread thread = new Thread(userIdle);
+            thread.Start();
+        }
 
           /// <summary>
           /// daily
@@ -88,6 +94,7 @@ namespace ASSEA_Logic
                     //send Message and ask if user went to break
                     while (InputTimer.GetInputIdleTime().Minutes > 1)
                     {
+                        Thread.Sleep(30000);
                         continue;
                     }
 
