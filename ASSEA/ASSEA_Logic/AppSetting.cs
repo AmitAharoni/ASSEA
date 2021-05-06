@@ -17,7 +17,8 @@ namespace ASSEA_Logic
           // file folder and details
           private static readonly string sr_FileLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\ASSEA";
           private static readonly string sr_File = sr_FileLocation + "\\AppSettings.txt";
-          private static System.Timers.Timer aTimer;
+          private static System.Timers.Timer mainTimer;
+          private static System.Timers.Timer decreaseTimer;
 
           public const int phy = 1;
           public const int ment = 2;
@@ -72,8 +73,8 @@ namespace ASSEA_Logic
            
           public void exitApplication()
           {
-               aTimer.Stop();
-               aTimer.Dispose();
+               mainTimer.Stop();
+               mainTimer.Dispose();
                exitApplication();
           }    
 
@@ -93,10 +94,10 @@ namespace ASSEA_Logic
                     level = 2000; //200000
                }
 
-               aTimer = new System.Timers.Timer(level);
-               aTimer.Elapsed += OnTimedEvent;
-               aTimer.AutoReset = true;
-               aTimer.Enabled = true;
+               mainTimer = new System.Timers.Timer(level);
+               mainTimer.Elapsed += OnTimedEvent;
+               mainTimer.AutoReset = true;
+               mainTimer.Enabled = true;
 
                while(true)
                {
@@ -169,6 +170,38 @@ namespace ASSEA_Logic
           public void decreaseScales()
           {
 
+               while(true)
+               {
+
+               }
+          }
+
+          public void changeMentalScale(int change)
+          {
+               lock(this)
+               {
+                    mentalScale += change;
+
+                    if(mentalScale > 100)
+                         mentalScale = 100;
+                    if(mentalScale < 0)
+                         mentalScale = 0;
+               }
+
+          }
+
+          public void changePhysicalScale(int change)
+          {
+               lock(this)
+               {
+                    physicalScale += change;
+
+                    if(physicalScale > 100)
+                         physicalScale = 100;
+                    if(physicalScale < 0)
+                         physicalScale = 0;
+               }
+
           }
 
           public enum eQuery
@@ -222,39 +255,35 @@ namespace ASSEA_Logic
 
           public void receiveAnswer(eQuery msgType, bool userAnswerToMSG)
           {
+               int change;
                if(msgType == eQuery.mental)
                {
-                    mentalScale = (userAnswerToMSG == true) ? mentalScale += 10 : mentalScale -= 10;
+                  change = (userAnswerToMSG == true) ? 10 : -10;
+                  changeMentalScale(change);
                }
                else if(msgType == eQuery.phy)
                {
-                    physicalScale = (userAnswerToMSG == true) ? physicalScale += 10 : physicalScale -= 10;
+                    change = (userAnswerToMSG == true) ? 10 : -10;
+                    changePhysicalScale(change);
                }
                else
                {
-                    mentalScale = (userAnswerToMSG == true) ? mentalScale += 10 : mentalScale -= 10;
-                    physicalScale = (userAnswerToMSG == true) ? physicalScale += 10 : physicalScale -= 10;
+                    change = (userAnswerToMSG == true) ? 10 : -10;
+                    changeMentalScale(change);
+                    change = (userAnswerToMSG == true) ? 10 : -10;
+                    changePhysicalScale(change);
                }
 
                if(userAnswerToMSG == true)
                {
 
-                    aTimer.Stop();
+                    mainTimer.Stop();
                }
-               if(mentalScale > 100)
-                    mentalScale = 100;
-               if(mentalScale < 0)
-                    mentalScale = 0;
-
-               if(physicalScale > 100)
-                    physicalScale = 100;
-               if(physicalScale < 0)
-                    physicalScale = 0;
           }
 
           public void returnFromBreak()
           {
-               aTimer.Start();
+               mainTimer.Start();
           }
 
           public static bool UserExist()
