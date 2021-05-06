@@ -8,6 +8,8 @@ using System.ComponentModel;
 using System.Threading;
 using System.IO;
 using System.Xml.Serialization;
+using System;
+using System.Timers;
 
 namespace ASSEA_Logic
 {
@@ -16,6 +18,7 @@ namespace ASSEA_Logic
           // file folder and details
           private static readonly string sr_FileLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\ASSEA";
           private static readonly string sr_File = sr_FileLocation + "\\AppSettings.txt";
+          private static System.Timers.Timer aTimer;
 
           public const int phy = 1;
           public const int ment = 2;
@@ -33,20 +36,21 @@ namespace ASSEA_Logic
           string mealLunch;
           string mealDinner;
           string friendlyBreak;
-          eInterset interset;
+          eInterset Interest;
           eNotificationsLevel notificationsLevel;
 
           public AppSetting(string username, DateTime lunch, DateTime dinner, DateTime friendly, eInterset interest, eNotificationsLevel notification)
           {
-                userName = username;
-                mealLunch = lunch.ToLongTimeString();
-                mealDinner = dinner.ToLongTimeString();
-                friendlyBreak = friendly.ToLongTimeString();
-                interset = interest;
-                notificationsLevel = notification;
+               userName = username;
+               mealLunch = lunch.ToLongTimeString();
+               mealDinner = dinner.ToLongTimeString();
+               friendlyBreak = friendly.ToLongTimeString();
+               Interest = interest;
+               notificationsLevel = notification;
 
                Thread thread = new Thread(userIdle);
                thread.Start();
+               SetTimer();
           }
 
           public enum eInterset
@@ -55,6 +59,7 @@ namespace ASSEA_Logic
                Music = 1,
                News = 2,
                All = 3
+
           }
 
           public enum eNotificationsLevel
@@ -62,6 +67,48 @@ namespace ASSEA_Logic
                soft = 0,
                normal = 1,
                extreme = 2
+          }
+           
+          public void exitApplication()
+          {
+               aTimer.Stop();
+               aTimer.Dispose();
+               exitApplication();
+          }
+                   
+
+          public void SetTimer()
+          {
+               int level;
+               if(this.notificationsLevel == eNotificationsLevel.soft)
+               {
+                    level = 6000; //600000
+               }
+               else if(this.notificationsLevel == eNotificationsLevel.normal)
+               {
+                    level = 4000; //400000
+               }
+               else
+               {
+                    level = 2000; //200000
+               }
+
+               aTimer = new System.Timers.Timer(level);
+               aTimer.Elapsed += OnTimedEvent;
+
+               while(true)
+               {
+
+               }
+
+
+          }
+
+          private void OnTimedEvent(Object source, ElapsedEventArgs e)
+          {
+               int list = selectListMSG();
+               pickMessage(list);
+
           }
 
           public static class InputTimer
@@ -136,6 +183,7 @@ namespace ASSEA_Logic
                return ment;
           }
 
+
           public void pickMessage(int listIndecator)
           {
                Random rd = new Random();
@@ -170,20 +218,33 @@ namespace ASSEA_Logic
 
           public void afterMsgAction(eQuery msgType, bool answer)
           {
+               aTimer.AutoReset = true;
+               aTimer.Enabled = true;
+
                if(msgType == eQuery.mental)
                {
-                    mentalScale = (answer == true) ? mentalScale += 20 : mentalScale -= 20;
+                    mentalScale = (answer == true) ? mentalScale += 10 : mentalScale -= 10;
                }
                else if(msgType == eQuery.phy)
                {
-                    physicalScale = (answer == true) ? physicalScale += 20 : physicalScale -= 20;
+                    physicalScale = (answer == true) ? physicalScale += 10 : physicalScale -= 10;
 
                }
                else
                {
-                    mentalScale = (answer == true) ? mentalScale += 20 : mentalScale -= 20;
-                    physicalScale = (answer == true) ? physicalScale += 20 : physicalScale -= 20;
+                    mentalScale = (answer == true) ? mentalScale += 10 : mentalScale -= 10;
+                    physicalScale = (answer == true) ? physicalScale += 10 : physicalScale -= 10;
                }
+
+               if(mentalScale > 100)
+                    mentalScale = 100;
+               if(mentalScale < 0)
+                    mentalScale = 0;
+
+               if(physicalScale > 100)
+                    physicalScale = 100;
+               if(physicalScale < 0)
+                    physicalScale = 0;
           }
 
 
