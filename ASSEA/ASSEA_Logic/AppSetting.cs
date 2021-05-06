@@ -1,8 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Threading;
@@ -39,8 +36,11 @@ namespace ASSEA_Logic
           eInterset Interest;
           eNotificationsLevel notificationsLevel;
 
+          private AppSetting() { }
+
           public AppSetting(string username, DateTime lunch, DateTime dinner, DateTime friendly, eInterset interest, eNotificationsLevel notification)
           {
+               CheckFolder();
                userName = username;
                mealLunch = lunch.ToLongTimeString();
                mealDinner = dinner.ToLongTimeString();
@@ -70,22 +70,22 @@ namespace ASSEA_Logic
                normal = 1,
                extreme = 2
           }
-           
+
           public void exitApplication()
           {
                mainTimer.Stop();
                mainTimer.Dispose();
-               exitApplication();
-          }    
+               System.Environment.Exit(-1);
+          }
 
           public void SetTimer()
           {
                int level;
-               if(this.notificationsLevel == eNotificationsLevel.soft)
+               if (this.notificationsLevel == eNotificationsLevel.soft)
                {
                     level = 6000; //600000
                }
-               else if(this.notificationsLevel == eNotificationsLevel.normal)
+               else if (this.notificationsLevel == eNotificationsLevel.normal)
                {
                     level = 4000; //400000
                }
@@ -99,11 +99,9 @@ namespace ASSEA_Logic
                mainTimer.AutoReset = true;
                mainTimer.Enabled = true;
 
-               while(true)
+               while (true)
                {
                }
-
-
           }
 
           private void OnTimedEvent(Object source, ElapsedEventArgs e)
@@ -169,22 +167,20 @@ namespace ASSEA_Logic
 
           public void decreaseScales()
           {
-
-               while(true)
+               while (true)
                {
 
                }
           }
-
           public void changeMentalScale(int change)
           {
-               lock(this)
+               lock (this)
                {
                     mentalScale += change;
 
-                    if(mentalScale > 100)
+                    if (mentalScale > 100)
                          mentalScale = 100;
-                    if(mentalScale < 0)
+                    if (mentalScale < 0)
                          mentalScale = 0;
                }
 
@@ -192,13 +188,13 @@ namespace ASSEA_Logic
 
           public void changePhysicalScale(int change)
           {
-               lock(this)
+               lock (this)
                {
                     physicalScale += change;
 
-                    if(physicalScale > 100)
+                    if (physicalScale > 100)
                          physicalScale = 100;
-                    if(physicalScale < 0)
+                    if (physicalScale < 0)
                          physicalScale = 0;
                }
 
@@ -231,7 +227,7 @@ namespace ASSEA_Logic
 
                int rand_num = rd.Next(0, maxlength);
 
-               if(listIndecator == phy)
+               if (listIndecator == phy)
                {
                     message = physicalMsgs[rand_num];
                     msgType = eQuery.phy;
@@ -253,15 +249,16 @@ namespace ASSEA_Logic
                msgNotifier.Invoke(msgToPass, msgType);
           }
 
+
           public void receiveAnswer(eQuery msgType, bool userAnswerToMSG)
           {
                int change;
-               if(msgType == eQuery.mental)
+               if (msgType == eQuery.mental)
                {
-                  change = (userAnswerToMSG == true) ? 10 : -10;
-                  changeMentalScale(change);
+                    change = (userAnswerToMSG == true) ? 10 : -10;
+                    changeMentalScale(change);
                }
-               else if(msgType == eQuery.phy)
+               else if (msgType == eQuery.phy)
                {
                     change = (userAnswerToMSG == true) ? 10 : -10;
                     changePhysicalScale(change);
@@ -274,7 +271,7 @@ namespace ASSEA_Logic
                     changePhysicalScale(change);
                }
 
-               if(userAnswerToMSG == true)
+               if (userAnswerToMSG == true)
                {
 
                     mainTimer.Stop();
@@ -322,6 +319,12 @@ namespace ASSEA_Logic
                }
           }
 
-
+          public void CheckFolder()
+          {
+               if (!Directory.Exists(sr_FileLocation))
+               {
+                    Directory.CreateDirectory(sr_FileLocation);
+               }
+          }
      }
 }
