@@ -5,6 +5,7 @@ using System.Text;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
+using System.Threading;
 
 namespace ASSEA_Logic
 {
