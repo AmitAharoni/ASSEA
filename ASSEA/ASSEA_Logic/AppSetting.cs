@@ -8,7 +8,6 @@ using System.ComponentModel;
 using System.Threading;
 using System.IO;
 using System.Xml.Serialization;
-using System;
 using System.Timers;
 
 namespace ASSEA_Logic
@@ -31,7 +30,7 @@ namespace ASSEA_Logic
 
           List<string> physicalMsgs = new List<string> { "Snack time", "Drink Somthing", "Coffee Time", };
           List<string> mentalMsgs = new List<string> { "Fix your posture", "Do some streches", "Wash your face" };
-
+               
           string userName;
           string mealLunch;
           string mealDinner;
@@ -95,10 +94,11 @@ namespace ASSEA_Logic
 
                aTimer = new System.Timers.Timer(level);
                aTimer.Elapsed += OnTimedEvent;
+               aTimer.AutoReset = true;
+               aTimer.Enabled = true;
 
                while(true)
                {
-
                }
 
 
@@ -108,7 +108,6 @@ namespace ASSEA_Logic
           {
                int list = selectListMSG();
                pickMessage(list);
-
           }
 
           public static class InputTimer
@@ -216,26 +215,27 @@ namespace ASSEA_Logic
                msgNotifier.Invoke(msgToPass, msgType);
           }
 
-          public void afterMsgAction(eQuery msgType, bool answer)
+          public void receiveAnswer(eQuery msgType, bool userAnswerToMSG)
           {
-               aTimer.AutoReset = true;
-               aTimer.Enabled = true;
-
                if(msgType == eQuery.mental)
                {
-                    mentalScale = (answer == true) ? mentalScale += 10 : mentalScale -= 10;
+                    mentalScale = (userAnswerToMSG == true) ? mentalScale += 10 : mentalScale -= 10;
                }
                else if(msgType == eQuery.phy)
                {
-                    physicalScale = (answer == true) ? physicalScale += 10 : physicalScale -= 10;
-
+                    physicalScale = (userAnswerToMSG == true) ? physicalScale += 10 : physicalScale -= 10;
                }
                else
                {
-                    mentalScale = (answer == true) ? mentalScale += 10 : mentalScale -= 10;
-                    physicalScale = (answer == true) ? physicalScale += 10 : physicalScale -= 10;
+                    mentalScale = (userAnswerToMSG == true) ? mentalScale += 10 : mentalScale -= 10;
+                    physicalScale = (userAnswerToMSG == true) ? physicalScale += 10 : physicalScale -= 10;
                }
 
+               if(userAnswerToMSG == true)
+               {
+
+                    aTimer.Stop();
+               }
                if(mentalScale > 100)
                     mentalScale = 100;
                if(mentalScale < 0)
@@ -247,6 +247,10 @@ namespace ASSEA_Logic
                     physicalScale = 0;
           }
 
+          public void returnFromBreak()
+          {
+               aTimer.Start();
+          }
 
           public static bool UserExist()
           {
