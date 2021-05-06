@@ -46,7 +46,8 @@ namespace ASSEA_Logic
           {
                Sport = 0,
                Music = 1,
-               News = 2
+               News = 2,
+               All = 3
           }
 
           public enum eNotificationsLevel
