@@ -101,8 +101,7 @@ namespace ASSEA_Logic
                     }
 
                     string askIfUserWentToBreak = "Hello, you were idle, did you were on a break?";
-
-                    //doWhenMsgReady
+                    doWhenMSGready(askIfUserWentToBreak, eQuery.idle);
                 }
             }
         }
@@ -111,7 +110,7 @@ namespace ASSEA_Logic
           {
                phy = 0,
                mental = 1,
-               breakOrWork = 2
+               idle = 2
           }
 
           public int selectListMSG()
