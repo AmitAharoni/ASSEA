@@ -99,8 +99,7 @@ namespace ASSEA_Logic
                         continue;
                     }
 
-                    string askIfUserWentToBreak = "Hello " + userName + ",you were idle"  +
-                    ", did you were on a break?";
+                    string askIfUserWentToBreak = "Hello, you were idle, did you were on a break?";
 
                     //doWhenMsgReady
                 }
@@ -144,8 +143,5 @@ namespace ASSEA_Logic
 
                //send notification
           }
-
-          public void pickMessage(int listIndecator)
-          {
-          }
+     }
 }
