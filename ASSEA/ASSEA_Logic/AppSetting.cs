@@ -16,7 +16,6 @@ namespace ASSEA_Logic
           private static readonly string sr_File = sr_FileLocation + "\\AppSettings.txt";
           private static System.Timers.Timer mainTimer;
           private static System.Timers.Timer decreaseTimer;
-
           public const int phy = 1;
           public const int ment = 2;
 
@@ -28,13 +27,13 @@ namespace ASSEA_Logic
 
           List<string> physicalMsgs = new List<string> { "Snack time", "Drink Somthing", "Coffee Time", };
           List<string> mentalMsgs = new List<string> { "Fix your posture", "Do some streches", "Wash your face" };
-               
-          string userName;
-          string mealLunch;
-          string mealDinner;
-          string friendlyBreak;
-          eInterset Interest;
-          eNotificationsLevel notificationsLevel;
+
+          public string userName { get; set; }
+          public string mealLunch { get; set; }
+          public string mealDinner { get; set; }
+          public string friendlyBreak { get; set; }
+          public eInterset Interest { get; set; }
+          public eNotificationsLevel notificationsLevel { get; set; }
 
           private AppSetting() { }
 
@@ -47,12 +46,17 @@ namespace ASSEA_Logic
                friendlyBreak = friendly.ToLongTimeString();
                Interest = interest;
                notificationsLevel = notification;
+               setThreads();
+          }
 
+          public void setThreads()
+          {
                Thread idleThread = new Thread(userIdle);
                idleThread.Start();
                Thread decreaseScalesThread = new Thread(decreaseScales);
                decreaseScalesThread.Start();
-               SetTimer();
+               Thread timerThread = new Thread(SetTimer);
+               timerThread.Start();
           }
 
           public enum eInterset
@@ -83,15 +87,15 @@ namespace ASSEA_Logic
                int level;
                if (this.notificationsLevel == eNotificationsLevel.soft)
                {
-                    level = 6000; //600000
+                    level = 600000; //600000
                }
                else if (this.notificationsLevel == eNotificationsLevel.normal)
                {
-                    level = 4000; //400000
+                    level = 400000; //400000
                }
                else
                {
-                    level = 2000; //200000
+                    level = 10000; //200000
                }
 
                mainTimer = new System.Timers.Timer(level);
@@ -101,6 +105,7 @@ namespace ASSEA_Logic
 
                while (true)
                {
+                    Thread.Sleep(10000);
                }
           }
 
@@ -117,7 +122,7 @@ namespace ASSEA_Logic
                     var plii = new NativeMethods.LastInputInfo();
                     plii.cbSize = (UInt32)Marshal.SizeOf(plii);
 
-                    if(NativeMethods.GetLastInputInfo(ref plii))
+                    if (NativeMethods.GetLastInputInfo(ref plii))
                     {
                          return TimeSpan.FromMilliseconds(Environment.TickCount - plii.dwTime);
                     }
@@ -147,13 +152,13 @@ namespace ASSEA_Logic
 
           public void userIdle()
           {
-               while(true)
+               while (true)
                {
                     TimeSpan idleTime = InputTimer.GetInputIdleTime();
-                    if(idleTime.TotalMinutes >= 10)
+                    if (idleTime.TotalMinutes >= 10)
                     {
                          //send Message and ask if user went to break
-                         while(InputTimer.GetInputIdleTime().Minutes > 1)
+                         while (InputTimer.GetInputIdleTime().Minutes > 1)
                          {
                               Thread.Sleep(30000);
                               continue;
@@ -167,11 +172,24 @@ namespace ASSEA_Logic
 
           public void decreaseScales()
           {
+               decreaseTimer = new System.Timers.Timer(300000);
+               decreaseTimer.Elapsed += decreaseEvent;
+               decreaseTimer.AutoReset = true;
+               decreaseTimer.Enabled = true;
+
+
                while (true)
                {
-
+                    Thread.Sleep(10000);
                }
           }
+
+          private void decreaseEvent(Object source, ElapsedEventArgs e)
+          {
+               changeMentalScale(-2);
+               changePhysicalScale(-2);
+          }
+
           public void changeMentalScale(int change)
           {
                lock (this)
@@ -209,7 +227,7 @@ namespace ASSEA_Logic
 
           public int selectListMSG()
           {
-               if(this.physicalScale < this.mentalScale)
+               if (this.physicalScale < this.mentalScale)
                {
                     return phy;
                }
@@ -242,11 +260,15 @@ namespace ASSEA_Logic
                doWhenMSGready(message, msgType);
           }
 
-          private event Action<string, eQuery> msgNotifier;
+          // public static event delegate startNotification;
+          public event Action<string, eQuery> msgNotifier;
 
           private void doWhenMSGready(string msgToPass, eQuery msgType)
           {
-               msgNotifier.Invoke(msgToPass, msgType);
+               if (msgNotifier != null)
+               {
+                    msgNotifier(msgToPass, msgType);
+               }
           }
 
 
@@ -292,9 +314,9 @@ namespace ASSEA_Logic
           {
                AppSetting userSetting = null;
 
-               if(File.Exists(sr_File))
+               if (File.Exists(sr_File))
                {
-                    using(Stream stream = new FileStream(sr_File, FileMode.Open))
+                    using (Stream stream = new FileStream(sr_File, FileMode.Open))
                     {
                          XmlSerializer serializer = new XmlSerializer(typeof(AppSetting));
                          userSetting = serializer.Deserialize(stream) as AppSetting;
@@ -306,13 +328,13 @@ namespace ASSEA_Logic
 
           public void SaveToFile()
           {
-               if(!File.Exists(sr_File))
+               if (!File.Exists(sr_File))
                {
                     Stream stream = new FileStream(sr_File, FileMode.Create);
                     stream.Dispose();
                }
 
-               using(Stream stream = new FileStream(sr_File, FileMode.Truncate))
+               using (Stream stream = new FileStream(sr_File, FileMode.Truncate))
                {
                     XmlSerializer serializer = new XmlSerializer(this.GetType());
                     serializer.Serialize(stream, this);

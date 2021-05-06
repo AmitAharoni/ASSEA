@@ -10,6 +10,7 @@ namespace ASSEA
 
           public FormFirstEntry(FormDashboard formDashboard)
           {
+               this.formDashboard = formDashboard;
                InitializeComponent();
                Error_TextBox.Hide();
                setTimePickers(LunceTime_TimePicker);
@@ -48,13 +49,11 @@ namespace ASSEA
                     Error_TextBox.Hide();
                     AppSetting appSetting = new AppSetting(Username_TextBox.Text, LunceTime_TimePicker.Value,
                          DinnerTime_TimePicker.Value, FriendlyTime_TimePicker.Value, interest, notificationsLevel);
-                    //FormDashboard dashboard = new FormDashboard(appSetting);
 
                     appSetting.SaveToFile();
                     this.formDashboard.appSetting = appSetting;
                     this.formDashboard.Show();
-                    //this.Hide();
-                    //dashboard.ShowDialog();
+                    this.Hide();   
                }
           }
 
@@ -63,11 +62,11 @@ namespace ASSEA
                AppSetting.eNotificationsLevel notificationsLevel = AppSetting.eNotificationsLevel.normal;
                String value = rbChecked.Text.ToLower();
 
-               if (value.Equals(AppSetting.eNotificationsLevel.soft))
+               if (value.Equals(AppSetting.eNotificationsLevel.soft.ToString()))
                {
                     notificationsLevel = AppSetting.eNotificationsLevel.soft;
                }
-               else if (value.Equals(AppSetting.eNotificationsLevel.extreme))
+               else if (value.Equals(AppSetting.eNotificationsLevel.extreme.ToString()))
                {
                     notificationsLevel = AppSetting.eNotificationsLevel.extreme;
                }

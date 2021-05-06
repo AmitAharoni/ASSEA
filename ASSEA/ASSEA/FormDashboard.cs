@@ -2,6 +2,7 @@
 using ASSEA_Logic;
 using System.Windows.Forms;
 using System;
+using System.Threading;
 
 namespace ASSEA
 {
@@ -17,15 +18,26 @@ namespace ASSEA
                if (appSetting == null)
                {
                     initSetting();
+               } 
+               else
+               {
+                    this.appSetting.setThreads();
                }
           }
 
           protected override void OnShown(EventArgs e)
           {
                base.OnShown(e);
-               // AppSetting.msgNotifier += new EventHandler(handleNotificationEvent);
+               this.appSetting.msgNotifier += opeNotification;
+               Welcome_TextBox.Text = String.Format("Hi {0}, update your states.", this.appSetting.userName);
           }
 
+          public void opeNotification(string message, AppSetting.eQuery query)
+          {
+               FormNotification formNotification = new FormNotification(this, message, query);
+               Thread notificationThread = new Thread(formNotification.Show);
+               notificationThread.Start();
+          }
           protected override void OnFormClosing(FormClosingEventArgs e)
           {
                base.OnFormClosing(e);

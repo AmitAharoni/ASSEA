@@ -1,7 +1,7 @@
 ﻿
 namespace ASSEA
 {
-     partial class Notification
+     partial class FormNotification
      {
           /// <summary>
           /// Required designer variable.
@@ -29,7 +29,7 @@ namespace ASSEA
           /// </summary>
           private void InitializeComponent()
           {
-               this.textBox1 = new System.Windows.Forms.TextBox();
+               this.Notification_TextBox = new System.Windows.Forms.TextBox();
                this.Later_Button = new System.Windows.Forms.PictureBox();
                this.Yes_Button = new System.Windows.Forms.PictureBox();
                this.No_Button = new System.Windows.Forms.PictureBox();
@@ -38,17 +38,17 @@ namespace ASSEA
                ((System.ComponentModel.ISupportInitialize)(this.No_Button)).BeginInit();
                this.SuspendLayout();
                // 
-               // textBox1
+               // Notification_TextBox
                // 
-               this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-               this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.textBox1.Location = new System.Drawing.Point(82, 57);
-               this.textBox1.Multiline = true;
-               this.textBox1.Name = "textBox1";
-               this.textBox1.Size = new System.Drawing.Size(703, 125);
-               this.textBox1.TabIndex = 0;
-               this.textBox1.Text = "Notification Text";
-               this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+               this.Notification_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+               this.Notification_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.Notification_TextBox.Location = new System.Drawing.Point(82, 57);
+               this.Notification_TextBox.Multiline = true;
+               this.Notification_TextBox.Name = "Notification_TextBox";
+               this.Notification_TextBox.Size = new System.Drawing.Size(703, 125);
+               this.Notification_TextBox.TabIndex = 0;
+               this.Notification_TextBox.Text = "Notification Text";
+               this.Notification_TextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
                // 
                // Later_Button
                // 
@@ -83,7 +83,7 @@ namespace ASSEA
                this.No_Button.TabStop = false;
                this.No_Button.Click += new System.EventHandler(this.noButton_OnClick);
                // 
-               // Notification
+               // FormNotification
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -92,8 +92,8 @@ namespace ASSEA
                this.Controls.Add(this.Later_Button);
                this.Controls.Add(this.Yes_Button);
                this.Controls.Add(this.No_Button);
-               this.Controls.Add(this.textBox1);
-               this.Name = "Notification";
+               this.Controls.Add(this.Notification_TextBox);
+               this.Name = "FormNotification";
                this.ShowIcon = false;
                this.Text = "Form1";
                ((System.ComponentModel.ISupportInitialize)(this.Later_Button)).EndInit();
@@ -106,7 +106,7 @@ namespace ASSEA
 
           #endregion
 
-          private System.Windows.Forms.TextBox textBox1;
+          private System.Windows.Forms.TextBox Notification_TextBox;
           private System.Windows.Forms.PictureBox No_Button;
           private System.Windows.Forms.PictureBox Yes_Button;
           private System.Windows.Forms.PictureBox Later_Button;

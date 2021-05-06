@@ -38,6 +38,7 @@
                this.Mental_TrackBar = new System.Windows.Forms.TrackBar();
                this.Physical_TextBox = new System.Windows.Forms.TextBox();
                this.Mental_TextBox = new System.Windows.Forms.TextBox();
+               this.Welcome_TextBox = new System.Windows.Forms.TextBox();
                ((System.ComponentModel.ISupportInitialize)(this.Settings_Button)).BeginInit();
                ((System.ComponentModel.ISupportInitialize)(this.Physical_TrackBar)).BeginInit();
                ((System.ComponentModel.ISupportInitialize)(this.Mental_TrackBar)).BeginInit();
@@ -46,7 +47,7 @@
                // Physical_ProgressBar
                // 
                this.Physical_ProgressBar.ForeColor = System.Drawing.SystemColors.ControlLight;
-               this.Physical_ProgressBar.Location = new System.Drawing.Point(311, 138);
+               this.Physical_ProgressBar.Location = new System.Drawing.Point(331, 281);
                this.Physical_ProgressBar.Margin = new System.Windows.Forms.Padding(7);
                this.Physical_ProgressBar.Name = "Physical_ProgressBar";
                this.Physical_ProgressBar.Size = new System.Drawing.Size(931, 65);
@@ -57,7 +58,7 @@
                // Mental_ProgressBar
                // 
                this.Mental_ProgressBar.ForeColor = System.Drawing.SystemColors.ControlLight;
-               this.Mental_ProgressBar.Location = new System.Drawing.Point(311, 359);
+               this.Mental_ProgressBar.Location = new System.Drawing.Point(331, 502);
                this.Mental_ProgressBar.Margin = new System.Windows.Forms.Padding(7);
                this.Mental_ProgressBar.Name = "Mental_ProgressBar";
                this.Mental_ProgressBar.Size = new System.Drawing.Size(931, 65);
@@ -69,7 +70,7 @@
                // 
                this.labelHunger.AutoSize = true;
                this.labelHunger.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.labelHunger.Location = new System.Drawing.Point(660, 62);
+               this.labelHunger.Location = new System.Drawing.Point(680, 205);
                this.labelHunger.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
                this.labelHunger.Name = "labelHunger";
                this.labelHunger.Size = new System.Drawing.Size(239, 40);
@@ -80,7 +81,7 @@
                // 
                this.labelTirednessState.AutoSize = true;
                this.labelTirednessState.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.labelTirednessState.Location = new System.Drawing.Point(672, 295);
+               this.labelTirednessState.Location = new System.Drawing.Point(692, 438);
                this.labelTirednessState.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
                this.labelTirednessState.Name = "labelTirednessState";
                this.labelTirednessState.Size = new System.Drawing.Size(213, 40);
@@ -116,7 +117,7 @@
                // 
                // Physical_TrackBar
                // 
-               this.Physical_TrackBar.Location = new System.Drawing.Point(298, 191);
+               this.Physical_TrackBar.Location = new System.Drawing.Point(318, 334);
                this.Physical_TrackBar.Maximum = 100;
                this.Physical_TrackBar.Name = "Physical_TrackBar";
                this.Physical_TrackBar.Size = new System.Drawing.Size(955, 101);
@@ -127,7 +128,7 @@
                // 
                // Mental_TrackBar
                // 
-               this.Mental_TrackBar.Location = new System.Drawing.Point(298, 419);
+               this.Mental_TrackBar.Location = new System.Drawing.Point(318, 562);
                this.Mental_TrackBar.Maximum = 100;
                this.Mental_TrackBar.Name = "Mental_TrackBar";
                this.Mental_TrackBar.Size = new System.Drawing.Size(955, 101);
@@ -141,7 +142,7 @@
                this.Physical_TextBox.BackColor = System.Drawing.SystemColors.Window;
                this.Physical_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
                this.Physical_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.Physical_TextBox.Location = new System.Drawing.Point(1284, 138);
+               this.Physical_TextBox.Location = new System.Drawing.Point(1304, 281);
                this.Physical_TextBox.Name = "Physical_TextBox";
                this.Physical_TextBox.ReadOnly = true;
                this.Physical_TextBox.Size = new System.Drawing.Size(100, 41);
@@ -154,12 +155,25 @@
                this.Mental_TextBox.BackColor = System.Drawing.SystemColors.Window;
                this.Mental_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
                this.Mental_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.Mental_TextBox.Location = new System.Drawing.Point(1270, 359);
+               this.Mental_TextBox.Location = new System.Drawing.Point(1290, 502);
                this.Mental_TextBox.Name = "Mental_TextBox";
                this.Mental_TextBox.ReadOnly = true;
                this.Mental_TextBox.Size = new System.Drawing.Size(100, 41);
                this.Mental_TextBox.TabIndex = 12;
                this.Mental_TextBox.Text = "50%";
+               // 
+               // Welcome_TextBox
+               // 
+               this.Welcome_TextBox.BackColor = System.Drawing.SystemColors.Window;
+               this.Welcome_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+               this.Welcome_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.Welcome_TextBox.Location = new System.Drawing.Point(467, 64);
+               this.Welcome_TextBox.Name = "Welcome_TextBox";
+               this.Welcome_TextBox.ReadOnly = true;
+               this.Welcome_TextBox.Size = new System.Drawing.Size(698, 41);
+               this.Welcome_TextBox.TabIndex = 13;
+               this.Welcome_TextBox.Text = "Hi {username}, update your states.";
+               this.Welcome_TextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
                // 
                // FormDashboard
                // 
@@ -167,6 +181,7 @@
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                this.BackColor = System.Drawing.Color.White;
                this.ClientSize = new System.Drawing.Size(1580, 783);
+               this.Controls.Add(this.Welcome_TextBox);
                this.Controls.Add(this.Mental_TextBox);
                this.Controls.Add(this.Physical_TextBox);
                this.Controls.Add(this.Mental_TrackBar);
@@ -200,5 +215,6 @@
           private System.Windows.Forms.TrackBar Mental_TrackBar;
           private System.Windows.Forms.TextBox Physical_TextBox;
           private System.Windows.Forms.TextBox Mental_TextBox;
+          private System.Windows.Forms.TextBox Welcome_TextBox;
      }
 }
