@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Threading;
@@ -29,8 +26,11 @@ namespace ASSEA_Logic
           List<string> physicalMsgs = new List<string> { "Snack time", "Drink Somthing", "Coffee Time", };
           List<string> mentalMsgs = new List<string> { "Fix your posture", "Do some streches", "Wash your face" };
 
+          private AppSetting() { }
+
           public AppSetting(string username, DateTime lunch, DateTime dinner, DateTime friendly, eInterset interest, eNotificationsLevel notification)
           {
+               CheckFolder();
                string userName = username;
                string mealFirst = lunch.ToLongTimeString();
                string mealSec = dinner.ToLongTimeString();
@@ -213,6 +213,14 @@ namespace ASSEA_Logic
                {
                     XmlSerializer serializer = new XmlSerializer(this.GetType());
                     serializer.Serialize(stream, this);
+               }
+          }
+
+          public void CheckFolder()
+          {
+               if (!Directory.Exists(sr_FileLocation))
+               {
+                    Directory.CreateDirectory(sr_FileLocation);
                }
           }
      }

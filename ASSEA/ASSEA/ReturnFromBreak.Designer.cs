@@ -1,6 +1,7 @@
-﻿namespace ASSEA
+﻿
+namespace ASSEA
 {
-     partial class Form1
+     partial class ReturnFromBreak
      {
           /// <summary>
           /// Required designer variable.
@@ -13,7 +14,7 @@
           /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
           protected override void Dispose(bool disposing)
           {
-               if(disposing && (components != null))
+               if (disposing && (components != null))
                {
                     components.Dispose();
                }
@@ -28,13 +29,21 @@
           /// </summary>
           private void InitializeComponent()
           {
-               this.components = new System.ComponentModel.Container();
+               this.SuspendLayout();
+               // 
+               // ReturnFromBreak
+               // 
+               this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                this.ClientSize = new System.Drawing.Size(800, 450);
-               this.Text = "Form1";
+               this.Name = "ReturnFromBreak";
+               this.ShowIcon = false;
+               this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+               this.Text = "Return From Break";
+               this.ResumeLayout(false);
+
           }
 
           #endregion
      }
 }
-

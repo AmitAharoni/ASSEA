@@ -47,7 +47,7 @@ namespace ASSEA
                this.Normal_RadioButton = new System.Windows.Forms.RadioButton();
                this.Extreme_RadioButton = new System.Windows.Forms.RadioButton();
                this.textBox6 = new System.Windows.Forms.TextBox();
-               this.comboBox1 = new System.Windows.Forms.ComboBox();
+               this.Interests_ComboBox = new System.Windows.Forms.ComboBox();
                this.textBox7 = new System.Windows.Forms.TextBox();
                this.Notifications_Panel = new System.Windows.Forms.Panel();
                this.Error_TextBox = new System.Windows.Forms.TextBox();
@@ -220,20 +220,20 @@ namespace ASSEA
                this.textBox6.TabIndex = 16;
                this.textBox6.Text = "Notifications Frequency : ";
                // 
-               // comboBox1
+               // Interests_ComboBox
                // 
-               this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.comboBox1.FormattingEnabled = true;
-               this.comboBox1.Items.AddRange(new object[] {
-            "Sports",
+               this.Interests_ComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.Interests_ComboBox.FormattingEnabled = true;
+               this.Interests_ComboBox.Items.AddRange(new object[] {
+            "Sport",
             "News",
             "Music",
-            "None"});
-               this.comboBox1.Location = new System.Drawing.Point(659, 1117);
-               this.comboBox1.Name = "comboBox1";
-               this.comboBox1.Size = new System.Drawing.Size(241, 48);
-               this.comboBox1.TabIndex = 17;
-               this.comboBox1.Text = "None";
+            "All"});
+               this.Interests_ComboBox.Location = new System.Drawing.Point(659, 1117);
+               this.Interests_ComboBox.Name = "Interests_ComboBox";
+               this.Interests_ComboBox.Size = new System.Drawing.Size(241, 48);
+               this.Interests_ComboBox.TabIndex = 17;
+               this.Interests_ComboBox.Text = "All";
                // 
                // textBox7
                // 
@@ -298,7 +298,7 @@ namespace ASSEA
                this.Controls.Add(this.Error_TextBox);
                this.Controls.Add(this.Notifications_Panel);
                this.Controls.Add(this.textBox7);
-               this.Controls.Add(this.comboBox1);
+               this.Controls.Add(this.Interests_ComboBox);
                this.Controls.Add(this.textBox6);
                this.Controls.Add(this.Submit_Button);
                this.Controls.Add(this.textBox5);
@@ -342,7 +342,7 @@ namespace ASSEA
           private RadioButton Normal_RadioButton;
           private RadioButton Extreme_RadioButton;
           private TextBox textBox6;
-          private ComboBox comboBox1;
+          private ComboBox Interests_ComboBox;
           private TextBox textBox7;
           private Panel Notifications_Panel;
           private TextBox Error_TextBox;

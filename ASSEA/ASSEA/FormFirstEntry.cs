@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using ASSEA_Logic;
 using System.Windows.Forms;
 
 namespace ASSEA
 {
      public partial class FormFirstEntry : Form
      {
-
           public FormFirstEntry()
           {
                InitializeComponent();
@@ -30,7 +24,7 @@ namespace ASSEA
           private void SubmitForm_OnClick(object sender, EventArgs e)
           {
                bool bChecked = false;
-               RadioButton rbChecked;
+               RadioButton rbChecked = null;
 
                foreach (Control control in Notifications_Panel.Controls)
                {
@@ -47,12 +41,53 @@ namespace ASSEA
                }
                else
                {
+                    AppSetting.eNotificationsLevel notificationsLevel = getNotificationLevel(rbChecked);
+                    AppSetting.eInterset interest = getInterest(Interests_ComboBox.Text);
                     Error_TextBox.Hide();
-                    User user = new User();
-                    FormDashboard dialog = new FormDashboard();
-                    dialog.ShowDialog();
-                    this.Close();
+                    AppSetting appSetting = new AppSetting(Username_TextBox.Text, LunceTime_TimePicker.Value,
+                         DinnerTime_TimePicker.Value, FriendlyTime_TimePicker.Value, interest, notificationsLevel);
+                    FormDashboard dashboard = new FormDashboard(appSetting);
+
+                    this.Hide();
+                    dashboard.ShowDialog();
                }
+          }
+
+          private AppSetting.eNotificationsLevel getNotificationLevel(RadioButton rbChecked)
+          {
+               AppSetting.eNotificationsLevel notificationsLevel = AppSetting.eNotificationsLevel.normal;
+               String value = rbChecked.Text.ToLower();
+
+               if (value.Equals(AppSetting.eNotificationsLevel.soft))
+               {
+                    notificationsLevel = AppSetting.eNotificationsLevel.soft;
+               }
+               else if (value.Equals(AppSetting.eNotificationsLevel.extreme))
+               {
+                    notificationsLevel = AppSetting.eNotificationsLevel.extreme;
+               }
+
+               return notificationsLevel;
+          }
+
+          private AppSetting.eInterset getInterest(String Interest)
+          {
+               AppSetting.eInterset interest = AppSetting.eInterset.All;
+
+               if (Interest.Equals(AppSetting.eInterset.Music))
+               {
+                    interest = AppSetting.eInterset.Music;
+               }
+               else if (Interest.Equals(AppSetting.eInterset.Sport))
+               {
+                    interest = AppSetting.eInterset.Sport;
+               }
+               else if (Interest.Equals(AppSetting.eInterset.News))
+               {
+                    interest = AppSetting.eInterset.News;
+               }
+
+               return interest;
           }
      }
 }

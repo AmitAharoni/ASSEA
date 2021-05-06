@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace ASSEA
 {
-     public partial class Form1 : Form
+     public partial class ReturnFromBreak : Form
      {
-          public Form1()
+          public ReturnFromBreak()
           {
                InitializeComponent();
           }
