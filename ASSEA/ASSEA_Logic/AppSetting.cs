@@ -47,8 +47,10 @@ namespace ASSEA_Logic
                Interest = interest;
                notificationsLevel = notification;
 
-               Thread thread = new Thread(userIdle);
-               thread.Start();
+               Thread idleThread = new Thread(userIdle);
+               idleThread.Start();
+               Thread decreaseScalesThread = new Thread(decreaseScales);
+               decreaseScalesThread.Start();
                SetTimer();
           }
 
@@ -73,8 +75,7 @@ namespace ASSEA_Logic
                aTimer.Stop();
                aTimer.Dispose();
                exitApplication();
-          }
-                   
+          }    
 
           public void SetTimer()
           {
@@ -165,6 +166,11 @@ namespace ASSEA_Logic
                }
           }
 
+          public void decreaseScales()
+          {
+
+          }
+
           public enum eQuery
           {
                phy = 0,
@@ -181,7 +187,6 @@ namespace ASSEA_Logic
 
                return ment;
           }
-
 
           public void pickMessage(int listIndecator)
           {
@@ -287,5 +292,7 @@ namespace ASSEA_Logic
                     serializer.Serialize(stream, this);
                }
           }
+
+
      }
 }
