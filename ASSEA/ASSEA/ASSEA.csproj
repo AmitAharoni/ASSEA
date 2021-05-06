@@ -105,5 +105,11 @@
   <ItemGroup>
     <None Include="photos\LetsGoButton.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ASSEA_Logic\ASSEA_Logic.csproj">
+      <Project>{769b9d51-abbf-4673-a553-ebacb83cee8c}</Project>
+      <Name>ASSEA_Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

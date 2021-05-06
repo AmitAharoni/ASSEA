@@ -15,7 +15,6 @@ namespace ASSEA
           public FormFirstEntry()
           {
                InitializeComponent();
-               // Header_TextBox.BackColor = Color.Transparent;
                Error_TextBox.Hide();
                setTimePickers(LunceTime_TimePicker);
                setTimePickers(DinnerTime_TimePicker);
@@ -49,10 +48,10 @@ namespace ASSEA
                else
                {
                     Error_TextBox.Hide();
-                    //// new logic. 
-                    //Form dialog = new DashboardForm();
-                    //dialog.ShowDialog();
-                    //this.Close();
+                    User user = new User();
+                    FormDashboard dialog = new FormDashboard();
+                    dialog.ShowDialog();
+                    this.Close();
                }
           }
      }

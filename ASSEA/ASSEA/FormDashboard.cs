@@ -1,19 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
+using ASSEA_Logic;
 using System.Windows.Forms;
 
 namespace ASSEA
 {
     public partial class FormDashboard : Form
     {
-        public FormDashboard()
-        {
-            InitializeComponent();
-        }
-    }
+          private User user;
+          public FormDashboard()
+          {
+               Physical_TrackBar.BackColor = Color.Green;
+               this.user = User.UserExist() ? user = User.LoadFromFile() : null;
+
+               if (user == null)
+               {
+                    initSetting();
+               }
+               else
+               {
+                    InitializeComponent();
+               }
+          }
+
+          public FormDashboard(User user)
+          {
+               this.user = user;
+          }
+
+          private void initSetting()
+          {
+               // User user = new User();
+               FormFirstEntry firstEntry = new FormFirstEntry();
+               firstEntry.ShowDialog();
+               this.Close();
+          }
+     }
 }

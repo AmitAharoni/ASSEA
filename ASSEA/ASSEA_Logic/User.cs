@@ -6,26 +6,19 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Threading;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace ASSEA_Logic
 {
-     class User
+     public class User
      {
+          // file folder and details
+          private static readonly string sr_FileLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\ASSEA";
+          private static readonly string sr_File = sr_FileLocation + "\\AppSettings.txt";
+
           public const int phy = 1;
           public const int ment = 2;
-          
-        public User(string username, DateTime lunch, DateTime dinner, DateTime friendly, eInterset interest, eNotificationsLevel notification)
-        {
-            string userName = username;
-            string mealFirst = lunch.ToLongTimeString();
-            string mealSec = dinner.ToLongTimeString();
-            string friendlyBreak = friendly.ToLongTimeString();
-            eInterset interset = interest;
-            eNotificationsLevel notificationsLevel = notification;
-
-            Thread thread = new Thread(userIdle);
-            thread.Start();
-        }
 
           /// <summary>
           /// daily
@@ -36,6 +29,18 @@ namespace ASSEA_Logic
           List<string> physicalMsgs = new List<string> { "Snack time", "Drink Somthing", "Coffee Time", };
           List<string> mentalMsgs = new List<string> { "Fix your posture", "Do some streches", "Wash your face" };
 
+          public User(string username, DateTime lunch, DateTime dinner, DateTime friendly, eInterset interest, eNotificationsLevel notification)
+          {
+               string userName = username;
+               string mealFirst = lunch.ToLongTimeString();
+               string mealSec = dinner.ToLongTimeString();
+               string friendlyBreak = friendly.ToLongTimeString();
+               eInterset interset = interest;
+               eNotificationsLevel notificationsLevel = notification;
+
+               Thread thread = new Thread(userIdle);
+               thread.Start();
+          }
 
           public enum eInterset
           {
@@ -50,61 +55,61 @@ namespace ASSEA_Logic
                normal = 1,
                extreme = 2
           }
-          
-        public static class InputTimer
-        {
-            public static TimeSpan GetInputIdleTime()
-            {
-                var plii = new NativeMethods.LastInputInfo();
-                plii.cbSize = (UInt32)Marshal.SizeOf(plii);
 
-                if (NativeMethods.GetLastInputInfo(ref plii))
-                {
-                    return TimeSpan.FromMilliseconds(Environment.TickCount - plii.dwTime);
-                }
-                else
-                {
-                    throw new Win32Exception(Marshal.GetLastWin32Error());
-                }
-            }
+          public static class InputTimer
+          {
+               public static TimeSpan GetInputIdleTime()
+               {
+                    var plii = new NativeMethods.LastInputInfo();
+                    plii.cbSize = (UInt32)Marshal.SizeOf(plii);
 
-            public static DateTimeOffset GetLastInputTime()
-            {
-                return DateTimeOffset.Now.Subtract(GetInputIdleTime());
-            }
-
-            private static class NativeMethods
-            {
-                public struct LastInputInfo
-                {
-                    public UInt32 cbSize;
-                    public UInt32 dwTime;
-                }
-
-                [DllImport("user32.dll")]
-                public static extern bool GetLastInputInfo(ref LastInputInfo plii);
-            }
-        }
-
-  public void userIdle()
-        {
-            while (true)
-            {
-                TimeSpan idleTime = InputTimer.GetInputIdleTime();
-                if (idleTime.TotalMinutes >= 10)
-                {
-                    //send Message and ask if user went to break
-                    while (InputTimer.GetInputIdleTime().Minutes > 1)
+                    if (NativeMethods.GetLastInputInfo(ref plii))
                     {
-                        Thread.Sleep(30000);
-                        continue;
+                         return TimeSpan.FromMilliseconds(Environment.TickCount - plii.dwTime);
+                    }
+                    else
+                    {
+                         throw new Win32Exception(Marshal.GetLastWin32Error());
+                    }
+               }
+
+               public static DateTimeOffset GetLastInputTime()
+               {
+                    return DateTimeOffset.Now.Subtract(GetInputIdleTime());
+               }
+
+               private static class NativeMethods
+               {
+                    public struct LastInputInfo
+                    {
+                         public UInt32 cbSize;
+                         public UInt32 dwTime;
                     }
 
-                    string askIfUserWentToBreak = "Hello, you were idle, did you were on a break?";
-                    doWhenMSGready(askIfUserWentToBreak, eQuery.idle);
-                }
-            }
-        }
+                    [DllImport("user32.dll")]
+                    public static extern bool GetLastInputInfo(ref LastInputInfo plii);
+               }
+          }
+
+          public void userIdle()
+          {
+               while (true)
+               {
+                    TimeSpan idleTime = InputTimer.GetInputIdleTime();
+                    if (idleTime.TotalMinutes >= 10)
+                    {
+                         //send Message and ask if user went to break
+                         while (InputTimer.GetInputIdleTime().Minutes > 1)
+                         {
+                              Thread.Sleep(30000);
+                              continue;
+                         }
+
+                         string askIfUserWentToBreak = "Hello, you were idle, did you were on a break?";
+                         doWhenMSGready(askIfUserWentToBreak, eQuery.idle);
+                    }
+               }
+          }
 
           public enum eQuery
           {
@@ -115,7 +120,7 @@ namespace ASSEA_Logic
 
           public int selectListMSG()
           {
-               if(this.physicalScale < this.mentalScale)
+               if (this.physicalScale < this.mentalScale)
                {
                     return phy;
                }
@@ -133,7 +138,7 @@ namespace ASSEA_Logic
 
                int rand_num = rd.Next(0, maxlength);
 
-               if(listIndecator == phy)
+               if (listIndecator == phy)
                {
                     message = physicalMsgs[rand_num];
                     msgType = eQuery.phy;
@@ -157,11 +162,11 @@ namespace ASSEA_Logic
 
           public void afterMsgAction(eQuery msgType, bool answer)
           {
-               if(msgType == eQuery.mental)
+               if (msgType == eQuery.mental)
                {
-                    mentalScale = (answer == true) ? mentalScale += 20 : mentalScale -= 20; 
+                    mentalScale = (answer == true) ? mentalScale += 20 : mentalScale -= 20;
                }
-               else if(msgType == eQuery.phy)
+               else if (msgType == eQuery.phy)
                {
                     physicalScale = (answer == true) ? physicalScale += 20 : physicalScale -= 20;
 
@@ -170,6 +175,43 @@ namespace ASSEA_Logic
                {
                     mentalScale = (answer == true) ? mentalScale += 20 : mentalScale -= 20;
                     physicalScale = (answer == true) ? physicalScale += 20 : physicalScale -= 20;
+               }
+          }
+
+
+          public static bool UserExist()
+          {
+               return File.Exists(sr_File);
+          }
+
+          public static User LoadFromFile()
+          {
+               User userSetting = null;
+
+               if (File.Exists(sr_File))
+               {
+                    using (Stream stream = new FileStream(sr_File, FileMode.Open))
+                    {
+                         XmlSerializer serializer = new XmlSerializer(typeof(User));
+                         userSetting = serializer.Deserialize(stream) as User;
+                    }
+               }
+
+               return userSetting;
+          }
+
+          public void SaveToFile()
+          {
+               if (!File.Exists(sr_File))
+               {
+                    Stream stream = new FileStream(sr_File, FileMode.Create);
+                    stream.Dispose();
+               }
+
+               using (Stream stream = new FileStream(sr_File, FileMode.Truncate))
+               {
+                    XmlSerializer serializer = new XmlSerializer(this.GetType());
+                    serializer.Serialize(stream, this);
                }
           }
      }
