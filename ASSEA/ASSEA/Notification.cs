@@ -7,10 +7,11 @@ namespace ASSEA
 {
      public partial class Notification : Form
      {
-          private AppSetting appSetting;
-          public Notification(AppSetting appSetting)
+          public FormDashboard formDashboard { get; set; }
+
+          public Notification(FormDashboard formDashboard)
           {
-               this.appSetting = appSetting;
+               this.formDashboard = formDashboard;
                InitializeComponent();
           }
 
@@ -22,8 +23,8 @@ namespace ASSEA
 
           private void yesButton_OnClick(object sender, EventArgs e)
           {
-               appSetting.recieveAnswer( , true);
-               this.Close()
+              // this.formDashboard.appSetting.receiveAnswer(AppSetting.eQuery , true);
+              // this.Close();
           }
 
           private void laterButton_OnClick(object sender, EventArgs e)
@@ -32,7 +33,7 @@ namespace ASSEA
 
           private void noButton_OnClick(object sender, EventArgs e)
           {
-               appSetting.recieveAnswer( , false);
+               // this.formDashboard.appSetting.receiveAnswer(AppSetting.eQuery, true);
           }
      }
 }

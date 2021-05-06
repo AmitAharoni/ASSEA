@@ -138,5 +138,8 @@
   <ItemGroup>
     <None Include="Resources\button_later.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_returned-from-break.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,23 +1,29 @@
 ﻿using System.Drawing;
 using ASSEA_Logic;
 using System.Windows.Forms;
+using System;
 
 namespace ASSEA
 {
     public partial class FormDashboard : Form
     {
-          private AppSetting appSetting = null;
+          public AppSetting appSetting { get; set; }
 
           public FormDashboard()
           {
                this.appSetting = AppSetting.UserExist() ? appSetting = AppSetting.LoadFromFile() : null;
+               InitializeComponent();
 
                if (appSetting == null)
                {
                     initSetting();
                }
-               
-               InitializeComponent();
+          }
+
+          protected override void OnShown(EventArgs e)
+          {
+               base.OnShown(e);
+               // AppSetting.msgNotifier += new EventHandler(handleNotificationEvent);
           }
 
           protected override void OnFormClosing(FormClosingEventArgs e)
@@ -42,7 +48,7 @@ namespace ASSEA
 
           private void initSetting()
           {
-               FormFirstEntry firstEntry = new FormFirstEntry();
+               FormFirstEntry firstEntry = new FormFirstEntry(this);
                firstEntry.ShowDialog();
           }
 

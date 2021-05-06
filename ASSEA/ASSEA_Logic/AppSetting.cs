@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.IO;
 using System.Xml.Serialization;
+using System.Timers;
 
 namespace ASSEA_Logic
 {
@@ -13,6 +14,8 @@ namespace ASSEA_Logic
           // file folder and details
           private static readonly string sr_FileLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\ASSEA";
           private static readonly string sr_File = sr_FileLocation + "\\AppSettings.txt";
+          private static System.Timers.Timer mainTimer;
+          private static System.Timers.Timer decreaseTimer;
 
           public const int phy = 1;
           public const int ment = 2;
@@ -25,21 +28,31 @@ namespace ASSEA_Logic
 
           List<string> physicalMsgs = new List<string> { "Snack time", "Drink Somthing", "Coffee Time", };
           List<string> mentalMsgs = new List<string> { "Fix your posture", "Do some streches", "Wash your face" };
+               
+          string userName;
+          string mealLunch;
+          string mealDinner;
+          string friendlyBreak;
+          eInterset Interest;
+          eNotificationsLevel notificationsLevel;
 
           private AppSetting() { }
 
           public AppSetting(string username, DateTime lunch, DateTime dinner, DateTime friendly, eInterset interest, eNotificationsLevel notification)
           {
                CheckFolder();
-               string userName = username;
-               string mealFirst = lunch.ToLongTimeString();
-               string mealSec = dinner.ToLongTimeString();
-               string friendlyBreak = friendly.ToLongTimeString();
-               eInterset interset = interest;
-               eNotificationsLevel notificationsLevel = notification;
+               userName = username;
+               mealLunch = lunch.ToLongTimeString();
+               mealDinner = dinner.ToLongTimeString();
+               friendlyBreak = friendly.ToLongTimeString();
+               Interest = interest;
+               notificationsLevel = notification;
 
-               Thread thread = new Thread(userIdle);
-               thread.Start();
+               Thread idleThread = new Thread(userIdle);
+               idleThread.Start();
+               Thread decreaseScalesThread = new Thread(decreaseScales);
+               decreaseScalesThread.Start();
+               SetTimer();
           }
 
           public enum eInterset
@@ -48,6 +61,7 @@ namespace ASSEA_Logic
                Music = 1,
                News = 2,
                All = 3
+
           }
 
           public enum eNotificationsLevel
@@ -55,6 +69,45 @@ namespace ASSEA_Logic
                soft = 0,
                normal = 1,
                extreme = 2
+          }
+
+          public void exitApplication()
+          {
+               mainTimer.Stop();
+               mainTimer.Dispose();
+               System.Environment.Exit(-1);
+          }
+
+          public void SetTimer()
+          {
+               int level;
+               if (this.notificationsLevel == eNotificationsLevel.soft)
+               {
+                    level = 6000; //600000
+               }
+               else if (this.notificationsLevel == eNotificationsLevel.normal)
+               {
+                    level = 4000; //400000
+               }
+               else
+               {
+                    level = 2000; //200000
+               }
+
+               mainTimer = new System.Timers.Timer(level);
+               mainTimer.Elapsed += OnTimedEvent;
+               mainTimer.AutoReset = true;
+               mainTimer.Enabled = true;
+
+               while (true)
+               {
+               }
+          }
+
+          private void OnTimedEvent(Object source, ElapsedEventArgs e)
+          {
+               int list = selectListMSG();
+               pickMessage(list);
           }
 
           public static class InputTimer
@@ -112,6 +165,41 @@ namespace ASSEA_Logic
                }
           }
 
+          public void decreaseScales()
+          {
+               while (true)
+               {
+
+               }
+          }
+          public void changeMentalScale(int change)
+          {
+               lock (this)
+               {
+                    mentalScale += change;
+
+                    if (mentalScale > 100)
+                         mentalScale = 100;
+                    if (mentalScale < 0)
+                         mentalScale = 0;
+               }
+
+          }
+
+          public void changePhysicalScale(int change)
+          {
+               lock (this)
+               {
+                    physicalScale += change;
+
+                    if (physicalScale > 100)
+                         physicalScale = 100;
+                    if (physicalScale < 0)
+                         physicalScale = 0;
+               }
+
+          }
+
           public enum eQuery
           {
                phy = 0,
@@ -139,7 +227,7 @@ namespace ASSEA_Logic
 
                int rand_num = rd.Next(0, maxlength);
 
-               if(listIndecator == phy)
+               if (listIndecator == phy)
                {
                     message = physicalMsgs[rand_num];
                     msgType = eQuery.phy;
@@ -161,24 +249,39 @@ namespace ASSEA_Logic
                msgNotifier.Invoke(msgToPass, msgType);
           }
 
-          public void afterMsgAction(eQuery msgType, bool answer)
-          {
-               if(msgType == eQuery.mental)
-               {
-                    mentalScale = (answer == true) ? mentalScale += 20 : mentalScale -= 20;
-               }
-               else if(msgType == eQuery.phy)
-               {
-                    physicalScale = (answer == true) ? physicalScale += 20 : physicalScale -= 20;
 
+          public void receiveAnswer(eQuery msgType, bool userAnswerToMSG)
+          {
+               int change;
+               if (msgType == eQuery.mental)
+               {
+                    change = (userAnswerToMSG == true) ? 10 : -10;
+                    changeMentalScale(change);
+               }
+               else if (msgType == eQuery.phy)
+               {
+                    change = (userAnswerToMSG == true) ? 10 : -10;
+                    changePhysicalScale(change);
                }
                else
                {
-                    mentalScale = (answer == true) ? mentalScale += 20 : mentalScale -= 20;
-                    physicalScale = (answer == true) ? physicalScale += 20 : physicalScale -= 20;
+                    change = (userAnswerToMSG == true) ? 10 : -10;
+                    changeMentalScale(change);
+                    change = (userAnswerToMSG == true) ? 10 : -10;
+                    changePhysicalScale(change);
+               }
+
+               if (userAnswerToMSG == true)
+               {
+
+                    mainTimer.Stop();
                }
           }
 
+          public void returnFromBreak()
+          {
+               mainTimer.Start();
+          }
 
           public static bool UserExist()
           {

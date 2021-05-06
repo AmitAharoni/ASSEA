@@ -93,6 +93,16 @@ namespace ASSEA.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap button_returned_from_break {
+            get {
+                object obj = ResourceManager.GetObject("button_returned-from-break", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap button_yes {
             get {
                 object obj = ResourceManager.GetObject("button_yes", resourceCulture);

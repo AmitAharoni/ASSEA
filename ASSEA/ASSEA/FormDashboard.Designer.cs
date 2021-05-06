@@ -89,6 +89,7 @@
                // 
                // EndShift_Button
                // 
+               this.EndShift_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
                this.EndShift_Button.BackColor = System.Drawing.SystemColors.ActiveBorder;
                this.EndShift_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.EndShift_Button.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -165,7 +166,7 @@
                this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                this.BackColor = System.Drawing.Color.White;
-               this.ClientSize = new System.Drawing.Size(1580, 785);
+               this.ClientSize = new System.Drawing.Size(1580, 783);
                this.Controls.Add(this.Mental_TextBox);
                this.Controls.Add(this.Physical_TextBox);
                this.Controls.Add(this.Mental_TrackBar);

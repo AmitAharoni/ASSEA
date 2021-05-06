@@ -6,7 +6,9 @@ namespace ASSEA
 {
      public partial class FormFirstEntry : Form
      {
-          public FormFirstEntry()
+          public FormDashboard formDashboard { get; set; }
+
+          public FormFirstEntry(FormDashboard formDashboard)
           {
                InitializeComponent();
                Error_TextBox.Hide();
@@ -46,10 +48,13 @@ namespace ASSEA
                     Error_TextBox.Hide();
                     AppSetting appSetting = new AppSetting(Username_TextBox.Text, LunceTime_TimePicker.Value,
                          DinnerTime_TimePicker.Value, FriendlyTime_TimePicker.Value, interest, notificationsLevel);
-                    FormDashboard dashboard = new FormDashboard(appSetting);
+                    //FormDashboard dashboard = new FormDashboard(appSetting);
 
-                    this.Hide();
-                    dashboard.ShowDialog();
+                    appSetting.SaveToFile();
+                    this.formDashboard.appSetting = appSetting;
+                    this.formDashboard.Show();
+                    //this.Hide();
+                    //dashboard.ShowDialog();
                }
           }
 
