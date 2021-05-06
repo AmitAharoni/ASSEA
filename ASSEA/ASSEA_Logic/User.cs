@@ -43,7 +43,7 @@ namespace ASSEA_Logic
                extreme = 2
           }
           
-                  public static class InputTimer
+        public static class InputTimer
         {
             public static TimeSpan GetInputIdleTime()
             {
@@ -78,16 +78,24 @@ namespace ASSEA_Logic
             }
         }
 
-        public void userIdle()
+  public void userIdle()
         {
-            TimeSpan idleTime = InputTimer.GetInputIdleTime();
-            if(idleTime.TotalMinutes > 10)
+            while (true)
             {
-                //send Message and ask if user went to break
-                string askIfUserWentToBreak = "Hello " + userName + ",you were idle" + idleTime.TotalMinutes +
-                    " minuets, did you were on a break?";
+                TimeSpan idleTime = InputTimer.GetInputIdleTime();
+                if (idleTime.TotalMinutes >= 10)
+                {
+                    //send Message and ask if user went to break
+                    while (InputTimer.GetInputIdleTime().Minutes > 1)
+                    {
+                        continue;
+                    }
 
+                    string askIfUserWentToBreak = "Hello " + userName + ",you were idle"  +
+                    ", did you were on a break?";
 
+                    //doWhenMsgReady
+                }
             }
         }
 
