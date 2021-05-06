@@ -6,11 +6,11 @@ namespace ASSEA
 {
     public partial class FormDashboard : Form
     {
-          private User user;
+          private AppSetting user;
           public FormDashboard()
           {
                Physical_TrackBar.BackColor = Color.Green;
-               this.user = User.UserExist() ? user = User.LoadFromFile() : null;
+               this.user = AppSetting.UserExist() ? user = AppSetting.LoadFromFile() : null;
 
                if (user == null)
                {
@@ -22,7 +22,7 @@ namespace ASSEA
                }
           }
 
-          public FormDashboard(User user)
+          public FormDashboard(AppSetting user)
           {
                this.user = user;
           }

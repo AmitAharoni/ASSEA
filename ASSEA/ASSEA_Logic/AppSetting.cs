@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace ASSEA_Logic
 {
-     public class User
+     public class AppSetting
      {
           // file folder and details
           private static readonly string sr_FileLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\ASSEA";
@@ -29,7 +29,7 @@ namespace ASSEA_Logic
           List<string> physicalMsgs = new List<string> { "Snack time", "Drink Somthing", "Coffee Time", };
           List<string> mentalMsgs = new List<string> { "Fix your posture", "Do some streches", "Wash your face" };
 
-          public User(string username, DateTime lunch, DateTime dinner, DateTime friendly, eInterset interest, eNotificationsLevel notification)
+          public AppSetting(string username, DateTime lunch, DateTime dinner, DateTime friendly, eInterset interest, eNotificationsLevel notification)
           {
                string userName = username;
                string mealFirst = lunch.ToLongTimeString();
@@ -63,7 +63,7 @@ namespace ASSEA_Logic
                     var plii = new NativeMethods.LastInputInfo();
                     plii.cbSize = (UInt32)Marshal.SizeOf(plii);
 
-                    if (NativeMethods.GetLastInputInfo(ref plii))
+                    if(NativeMethods.GetLastInputInfo(ref plii))
                     {
                          return TimeSpan.FromMilliseconds(Environment.TickCount - plii.dwTime);
                     }
@@ -93,13 +93,13 @@ namespace ASSEA_Logic
 
           public void userIdle()
           {
-               while (true)
+               while(true)
                {
                     TimeSpan idleTime = InputTimer.GetInputIdleTime();
-                    if (idleTime.TotalMinutes >= 10)
+                    if(idleTime.TotalMinutes >= 10)
                     {
                          //send Message and ask if user went to break
-                         while (InputTimer.GetInputIdleTime().Minutes > 1)
+                         while(InputTimer.GetInputIdleTime().Minutes > 1)
                          {
                               Thread.Sleep(30000);
                               continue;
@@ -120,7 +120,7 @@ namespace ASSEA_Logic
 
           public int selectListMSG()
           {
-               if (this.physicalScale < this.mentalScale)
+               if(this.physicalScale < this.mentalScale)
                {
                     return phy;
                }
@@ -138,7 +138,7 @@ namespace ASSEA_Logic
 
                int rand_num = rd.Next(0, maxlength);
 
-               if (listIndecator == phy)
+               if(listIndecator == phy)
                {
                     message = physicalMsgs[rand_num];
                     msgType = eQuery.phy;
@@ -162,11 +162,11 @@ namespace ASSEA_Logic
 
           public void afterMsgAction(eQuery msgType, bool answer)
           {
-               if (msgType == eQuery.mental)
+               if(msgType == eQuery.mental)
                {
                     mentalScale = (answer == true) ? mentalScale += 20 : mentalScale -= 20;
                }
-               else if (msgType == eQuery.phy)
+               else if(msgType == eQuery.phy)
                {
                     physicalScale = (answer == true) ? physicalScale += 20 : physicalScale -= 20;
 
@@ -184,16 +184,16 @@ namespace ASSEA_Logic
                return File.Exists(sr_File);
           }
 
-          public static User LoadFromFile()
+          public static AppSetting LoadFromFile()
           {
-               User userSetting = null;
+               AppSetting userSetting = null;
 
-               if (File.Exists(sr_File))
+               if(File.Exists(sr_File))
                {
-                    using (Stream stream = new FileStream(sr_File, FileMode.Open))
+                    using(Stream stream = new FileStream(sr_File, FileMode.Open))
                     {
-                         XmlSerializer serializer = new XmlSerializer(typeof(User));
-                         userSetting = serializer.Deserialize(stream) as User;
+                         XmlSerializer serializer = new XmlSerializer(typeof(AppSetting));
+                         userSetting = serializer.Deserialize(stream) as AppSetting;
                     }
                }
 
@@ -202,13 +202,13 @@ namespace ASSEA_Logic
 
           public void SaveToFile()
           {
-               if (!File.Exists(sr_File))
+               if(!File.Exists(sr_File))
                {
                     Stream stream = new FileStream(sr_File, FileMode.Create);
                     stream.Dispose();
                }
 
-               using (Stream stream = new FileStream(sr_File, FileMode.Truncate))
+               using(Stream stream = new FileStream(sr_File, FileMode.Truncate))
                {
                     XmlSerializer serializer = new XmlSerializer(this.GetType());
                     serializer.Serialize(stream, this);
