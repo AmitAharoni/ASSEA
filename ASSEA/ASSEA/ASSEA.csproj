@@ -50,11 +50,11 @@
     <Compile Include="ReturnFromBreak.Designer.cs">
       <DependentUpon>ReturnFromBreak.cs</DependentUpon>
     </Compile>
-    <Compile Include="Notification.cs">
+    <Compile Include="FormNotification.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Notification.Designer.cs">
-      <DependentUpon>Notification.cs</DependentUpon>
+    <Compile Include="FormNotification.Designer.cs">
+      <DependentUpon>FormNotification.cs</DependentUpon>
     </Compile>
     <Compile Include="FormDailySettings.cs">
       <SubType>Form</SubType>
@@ -79,8 +79,8 @@
     <EmbeddedResource Include="ReturnFromBreak.resx">
       <DependentUpon>ReturnFromBreak.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Notification.resx">
-      <DependentUpon>Notification.cs</DependentUpon>
+    <EmbeddedResource Include="FormNotification.resx">
+      <DependentUpon>FormNotification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDailySettings.resx">
       <DependentUpon>FormDailySettings.cs</DependentUpon>
