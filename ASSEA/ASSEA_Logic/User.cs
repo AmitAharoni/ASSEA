@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Globalization;
+using System.Runtime.InteropServices;
+using System.ComponentModel;
 
 namespace ASSEA_Logic
 {
@@ -40,6 +42,54 @@ namespace ASSEA_Logic
                normal = 1,
                extreme = 2
           }
+          
+                  public static class InputTimer
+        {
+            public static TimeSpan GetInputIdleTime()
+            {
+                var plii = new NativeMethods.LastInputInfo();
+                plii.cbSize = (UInt32)Marshal.SizeOf(plii);
+
+                if (NativeMethods.GetLastInputInfo(ref plii))
+                {
+                    return TimeSpan.FromMilliseconds(Environment.TickCount - plii.dwTime);
+                }
+                else
+                {
+                    throw new Win32Exception(Marshal.GetLastWin32Error());
+                }
+            }
+
+            public static DateTimeOffset GetLastInputTime()
+            {
+                return DateTimeOffset.Now.Subtract(GetInputIdleTime());
+            }
+
+            private static class NativeMethods
+            {
+                public struct LastInputInfo
+                {
+                    public UInt32 cbSize;
+                    public UInt32 dwTime;
+                }
+
+                [DllImport("user32.dll")]
+                public static extern bool GetLastInputInfo(ref LastInputInfo plii);
+            }
+        }
+
+        public void userIdle()
+        {
+            TimeSpan idleTime = InputTimer.GetInputIdleTime();
+            if(idleTime.TotalMinutes > 10)
+            {
+                //send Message and ask if user went to break
+                string askIfUserWentToBreak = "Hello " + userName + ",you were idle" + idleTime.TotalMinutes +
+                    " minuets, did you were on a break?";
+
+
+            }
+        }
 
           public int selectListMSG()
           {
