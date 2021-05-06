@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1169
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASSEA", "ASSEA\ASSEA.csproj", "{B5F290C2-1E0E-43EE-B741-4AAEB8D4DDD2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASSEA_Logic", "ASSEA_Logic\ASSEA_Logic.csproj", "{769B9D51-ABBF-4673-A553-EBACB83CEE8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B5F290C2-1E0E-43EE-B741-4AAEB8D4DDD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5F290C2-1E0E-43EE-B741-4AAEB8D4DDD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5F290C2-1E0E-43EE-B741-4AAEB8D4DDD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{769B9D51-ABBF-4673-A553-EBACB83CEE8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{769B9D51-ABBF-4673-A553-EBACB83CEE8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{769B9D51-ABBF-4673-A553-EBACB83CEE8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{769B9D51-ABBF-4673-A553-EBACB83CEE8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

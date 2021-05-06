@@ -31,7 +31,7 @@ namespace ASSEA_Logic
                Music = 1,
                News = 2
           }
-
+          //amit
           public enum eNotificationsLevel
           {
                soft = 0,
