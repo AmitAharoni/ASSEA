@@ -29,14 +29,21 @@ namespace ASSEA_Logic
           List<string> physicalMsgs = new List<string> { "Snack time", "Drink Somthing", "Coffee Time", };
           List<string> mentalMsgs = new List<string> { "Fix your posture", "Do some streches", "Wash your face" };
 
+          string userName;
+          string mealLunch;
+          string mealDinner;
+          string friendlyBreak;
+          eInterset interset;
+          eNotificationsLevel notificationsLevel;
+
           public AppSetting(string username, DateTime lunch, DateTime dinner, DateTime friendly, eInterset interest, eNotificationsLevel notification)
           {
-               string userName = username;
-               string mealFirst = lunch.ToLongTimeString();
-               string mealSec = dinner.ToLongTimeString();
-               string friendlyBreak = friendly.ToLongTimeString();
-               eInterset interset = interest;
-               eNotificationsLevel notificationsLevel = notification;
+                userName = username;
+                mealLunch = lunch.ToLongTimeString();
+                mealDinner = dinner.ToLongTimeString();
+                friendlyBreak = friendly.ToLongTimeString();
+                interset = interest;
+                notificationsLevel = notification;
 
                Thread thread = new Thread(userIdle);
                thread.Start();
