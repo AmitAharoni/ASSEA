@@ -35,8 +35,9 @@ namespace ASSEA
           public void opeNotification(string message, AppSetting.eQuery query)
           {
                FormNotification formNotification = new FormNotification(this, message, query);
-               Thread notificationThread = new Thread(formNotification.Show);
-               notificationThread.Start();
+               // Thread notificationThread = new Thread(formNotification.Show);
+               // notificationThread.Start();
+               formNotification.ShowDialog();
           }
           protected override void OnFormClosing(FormClosingEventArgs e)
           {
