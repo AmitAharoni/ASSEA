@@ -10,6 +10,7 @@ namespace ASSEA
      {
           public FormDashboard formDashboard { get; set; }
           private AppSetting.eQuery query;
+          private System.Windows.Forms.Timer tmr;
 
           public FormNotification(FormDashboard formDashboard, string message, AppSetting.eQuery query)
           {
@@ -17,6 +18,13 @@ namespace ASSEA
                this.formDashboard = formDashboard;
                Notification_TextBox.Text = message;
                this.query = query;
+
+               tmr = new System.Windows.Forms.Timer();
+               tmr.Tick += delegate {
+                    this.Close();
+               };
+               tmr.Interval = (int)TimeSpan.FromMinutes(1).TotalMilliseconds;
+               tmr.Start();
           }
 
           protected override void OnClosed(EventArgs e)

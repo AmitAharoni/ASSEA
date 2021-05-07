@@ -22,7 +22,8 @@ namespace ASSEA_Logic
           /// <summary>
           /// daily
           /// </summary>
-          int physicalScale = 50, mentalScale = 50; //need to be between 0 - 100
+          public int physicalScale { get; set; }
+          public int mentalScale { get; set; } 
           int notificationAnsweredByUser = 0;
 
           List<string> physicalMsgs = new List<string> { "Snack time", "Drink Somthing", "Coffee Time", };
@@ -46,6 +47,8 @@ namespace ASSEA_Logic
                friendlyBreak = friendly.ToLongTimeString();
                Interest = interest;
                notificationsLevel = notification;
+               physicalScale = 50;
+               mentalScale = 50;
                setThreads();
           }
 
@@ -65,7 +68,6 @@ namespace ASSEA_Logic
                Music = 1,
                News = 2,
                All = 3
-
           }
 
           public enum eNotificationsLevel
@@ -73,13 +75,6 @@ namespace ASSEA_Logic
                soft = 0,
                normal = 1,
                extreme = 2
-          }
-
-          public void exitApplication()
-          {
-               mainTimer.Stop();
-               mainTimer.Dispose();
-               System.Environment.Exit(-1);
           }
 
           public void SetTimer()
@@ -188,8 +183,19 @@ namespace ASSEA_Logic
           {
                changeMentalScale(-2);
                changePhysicalScale(-2);
+               updateScales(physicalScale, mentalScale);
           }
 
+          public event Action<int, int> updateScalesNotifier;
+
+          private void updateScales(int physical, int mental)
+          {
+               if (updateScalesNotifier != null)
+               {
+                    updateScalesNotifier(physical, mental);
+               }
+          }
+     
           public void changeMentalScale(int change)
           {
                lock (this)
@@ -298,6 +304,8 @@ namespace ASSEA_Logic
 
                     mainTimer.Stop();
                }
+
+               updateScales(physicalScale, mentalScale);
           }
 
           public void returnFromBreak()
