@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ASSEA_Logic;
 using System.Windows.Forms;
 using System.Threading;
+using System.Drawing;
 
 namespace ASSEA
 {
@@ -19,6 +20,13 @@ namespace ASSEA
                this.query = query;
           }
 
+          protected override void OnLoad(EventArgs e)
+          {
+               var screen = Screen.FromPoint(this.Location);
+               this.Location = new Point(screen.WorkingArea.Right - this.Width, screen.WorkingArea.Bottom - this.Height);
+               base.OnLoad(e);
+          }
+
           protected override void OnClosed(EventArgs e)
           {
                base.OnClosed(e);
@@ -32,7 +40,7 @@ namespace ASSEA
 
           private void laterButton_OnClick(object sender, EventArgs e)
           {
-               // 
+               this.Close();
           }
 
           private void noButton_OnClick(object sender, EventArgs e)

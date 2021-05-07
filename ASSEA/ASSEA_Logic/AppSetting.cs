@@ -25,8 +25,8 @@ namespace ASSEA_Logic
           int physicalScale = 50, mentalScale = 50; //need to be between 0 - 100
           int notificationAnsweredByUser = 0;
 
-          List<string> physicalMsgs = new List<string> { "Snack time", "Drink Somthing", "Coffee Time", };
-          List<string> mentalMsgs = new List<string> { "Fix your posture", "Do some streches", "Wash your face" };
+          List<string> physicalMsgs = new List<string> {"Snack time", "Drink Somthing", "Coffee Time"};
+          List<string> mentalMsgs = new List<string> {"Fix your posture", "Do some streches", "Wash your face"};
 
           public string userName { get; set; }
           public string mealLunch { get; set; }
@@ -188,6 +188,7 @@ namespace ASSEA_Logic
           {
                changeMentalScale(-2);
                changePhysicalScale(-2);
+
           }
 
           public void changeMentalScale(int change)
@@ -348,5 +349,6 @@ namespace ASSEA_Logic
                     Directory.CreateDirectory(sr_FileLocation);
                }
           }
+
      }
 }
