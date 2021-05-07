@@ -71,7 +71,6 @@ namespace ASSEA
                }
           }
 
-
           public FormDashboard(AppSetting appSetting)
           {
                InitializeComponent();
@@ -108,5 +107,6 @@ namespace ASSEA
           {
                // open settings
           }
+
      }
 }

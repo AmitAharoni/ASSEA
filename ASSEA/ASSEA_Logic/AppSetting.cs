@@ -26,8 +26,8 @@ namespace ASSEA_Logic
           public int mentalScale { get; set; } 
           int notificationAnsweredByUser = 0;
 
-          List<string> physicalMsgs = new List<string> { "Snack time", "Drink Somthing", "Coffee Time", };
-          List<string> mentalMsgs = new List<string> { "Fix your posture", "Do some streches", "Wash your face" };
+          List<string> physicalMsgs = new List<string> {"Snack time", "Drink Somthing", "Coffee Time"};
+          List<string> mentalMsgs = new List<string> {"Fix your posture", "Do some streches", "Wash your face"};
 
           public string userName { get; set; }
           public string mealLunch { get; set; }
@@ -184,6 +184,7 @@ namespace ASSEA_Logic
                changeMentalScale(-2);
                changePhysicalScale(-2);
                updateScales(physicalScale, mentalScale);
+
           }
 
           public event Action<int, int> updateScalesNotifier;
@@ -356,5 +357,6 @@ namespace ASSEA_Logic
                     Directory.CreateDirectory(sr_FileLocation);
                }
           }
+
      }
 }
