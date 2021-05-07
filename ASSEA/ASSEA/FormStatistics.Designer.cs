@@ -29,15 +29,16 @@ namespace ASSEA
           /// </summary>
           private void InitializeComponent()
           {
-               System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-               System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-               System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-               System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-               System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-               System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+               System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+               System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+               System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+               System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+               System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+               System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
                this.chartPiePhysical = new System.Windows.Forms.DataVisualization.Charting.Chart();
                this.textBox1 = new System.Windows.Forms.TextBox();
                this.chartPieMental = new System.Windows.Forms.DataVisualization.Charting.Chart();
+               this.textBox2 = new System.Windows.Forms.TextBox();
                ((System.ComponentModel.ISupportInitialize)(this.chartPiePhysical)).BeginInit();
                ((System.ComponentModel.ISupportInitialize)(this.chartPieMental)).BeginInit();
                this.SuspendLayout();
@@ -45,54 +46,65 @@ namespace ASSEA
                // chartPiePhysical
                // 
                this.chartPiePhysical.BorderlineColor = System.Drawing.Color.Transparent;
-               chartArea3.Name = "ChartArea1";
-               this.chartPiePhysical.ChartAreas.Add(chartArea3);
-               legend3.Name = "Legend1";
-               this.chartPiePhysical.Legends.Add(legend3);
-               this.chartPiePhysical.Location = new System.Drawing.Point(179, 313);
+               chartArea1.Name = "ChartArea1";
+               this.chartPiePhysical.ChartAreas.Add(chartArea1);
+               legend1.Name = "Legend1";
+               this.chartPiePhysical.Legends.Add(legend1);
+               this.chartPiePhysical.Location = new System.Drawing.Point(0, 391);
                this.chartPiePhysical.Name = "chartPiePhysical";
-               series3.ChartArea = "ChartArea1";
-               series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-               series3.Legend = "Legend1";
-               series3.Name = "ChartPie";
-               this.chartPiePhysical.Series.Add(series3);
-               this.chartPiePhysical.Size = new System.Drawing.Size(833, 879);
+               series1.ChartArea = "ChartArea1";
+               series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+               series1.Legend = "Legend1";
+               series1.Name = "ChartPie";
+               this.chartPiePhysical.Series.Add(series1);
+               this.chartPiePhysical.Size = new System.Drawing.Size(1009, 707);
                this.chartPiePhysical.TabIndex = 0;
                this.chartPiePhysical.Text = "chart1";
                // 
                // textBox1
                // 
-               this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
                this.textBox1.BackColor = System.Drawing.SystemColors.Window;
                this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-               this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.textBox1.Location = new System.Drawing.Point(490, 46);
+               this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.textBox1.Location = new System.Drawing.Point(0, 0);
                this.textBox1.Name = "textBox1";
                this.textBox1.ReadOnly = true;
-               this.textBox1.Size = new System.Drawing.Size(1076, 136);
+               this.textBox1.Size = new System.Drawing.Size(2129, 89);
                this.textBox1.TabIndex = 1;
-               this.textBox1.Text = "Day Summary";
+               this.textBox1.Text = "Hi! here\'s your day summary";
                this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
                // 
                // chartPieMental
                // 
                this.chartPieMental.BorderlineColor = System.Drawing.Color.Transparent;
-               chartArea4.Name = "ChartArea1";
-               this.chartPieMental.ChartAreas.Add(chartArea4);
-               legend4.Name = "Legend1";
-               this.chartPieMental.Legends.Add(legend4);
-               this.chartPieMental.Location = new System.Drawing.Point(1049, 313);
+               chartArea2.Name = "ChartArea1";
+               this.chartPieMental.ChartAreas.Add(chartArea2);
+               legend2.Name = "Legend1";
+               this.chartPieMental.Legends.Add(legend2);
+               this.chartPieMental.Location = new System.Drawing.Point(1164, 391);
                this.chartPieMental.Name = "chartPieMental";
-               series4.ChartArea = "ChartArea1";
-               series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-               series4.Legend = "Legend1";
-               series4.Name = "ChartPie";
-               this.chartPieMental.Series.Add(series4);
-               this.chartPieMental.Size = new System.Drawing.Size(833, 879);
+               series2.ChartArea = "ChartArea1";
+               series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+               series2.Legend = "Legend1";
+               series2.Name = "ChartPie";
+               this.chartPieMental.Series.Add(series2);
+               this.chartPieMental.Size = new System.Drawing.Size(965, 720);
                this.chartPieMental.TabIndex = 2;
                this.chartPieMental.Text = "chart1";
+               // 
+               // textBox2
+               // 
+               this.textBox2.BackColor = System.Drawing.SystemColors.Window;
+               this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+               this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.textBox2.Location = new System.Drawing.Point(0, 119);
+               this.textBox2.Name = "textBox2";
+               this.textBox2.ReadOnly = true;
+               this.textBox2.Size = new System.Drawing.Size(2129, 75);
+               this.textBox2.TabIndex = 3;
+               this.textBox2.Text = "Today you\'ve worked 06:37 hours. Received 13 messages.";
+               this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
                // 
                // Statistics
                // 
@@ -101,6 +113,7 @@ namespace ASSEA
                this.AutoSize = true;
                this.BackColor = System.Drawing.SystemColors.Window;
                this.ClientSize = new System.Drawing.Size(2129, 1123);
+               this.Controls.Add(this.textBox2);
                this.Controls.Add(this.chartPieMental);
                this.Controls.Add(this.textBox1);
                this.Controls.Add(this.chartPiePhysical);
@@ -120,5 +133,6 @@ namespace ASSEA
           private System.Windows.Forms.DataVisualization.Charting.Chart chartPiePhysical;
           private System.Windows.Forms.TextBox textBox1;
           private System.Windows.Forms.DataVisualization.Charting.Chart chartPieMental;
+          private System.Windows.Forms.TextBox textBox2;
      }
 }

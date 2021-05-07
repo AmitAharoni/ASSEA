@@ -29,8 +29,8 @@ namespace ASSEA_Logic
           public int mentalScale { get; set; } 
           int notificationAnsweredByUser = 0;
 
-          List<string> physicalMsgs = new List<string> {"Snack time", "Drink Somthing", "Coffee Time"};
-          List<string> mentalMsgs = new List<string> {"Fix your posture", "Do some streches", "Wash your face"};
+          List<string> physicalMsgs = new List<string> {"Snack time", "Drink Something", "Coffee Time"};
+          List<string> mentalMsgs = new List<string> {"Close your eyes and breath", "Put your favorite music and relax", "Wash your face to feel better"};
 
           public string userName { get; set; }
           public DateTime mealLunch { get; set; }
@@ -287,7 +287,7 @@ namespace ASSEA_Logic
                eQuery msgType;
                int maxlength = 0;
                string message;
-               maxlength = listIndecator == phy ? (physicalMsgs.Capacity - 1) : (mentalMsgs.Capacity - 1);
+               maxlength = listIndecator == phy ? (physicalMsgs.Count - 1) : (mentalMsgs.Count - 1);
 
                int rand_num = rd.Next(0, maxlength);
 

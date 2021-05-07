@@ -28,5 +28,6 @@ namespace ASSEA
                base.OnClosed(e);
                System.Environment.Exit(-1);
           }
+
      }
 }
