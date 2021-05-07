@@ -19,6 +19,7 @@ namespace ASSEA_Logic
           private static System.Timers.Timer mealTimer;
           public const int phy = 1;
           public const int ment = 2;
+          public int mentalAnswersYes = 2, mentalAnswerNo = 3, physicalAnswerYes = 4, physicalAnswerNo = 1;
 
           /// <summary>
           /// daily
@@ -79,6 +80,13 @@ namespace ASSEA_Logic
                soft = 0,
                normal = 1,
                extreme = 2
+          }
+
+          public void endAndShow()
+          {
+               onBreak = true;
+               mainTimer.Stop();
+               decreaseTimer.Stop();
           }
 
           public void SetTimer()
@@ -318,10 +326,12 @@ namespace ASSEA_Logic
                {
                     if (msgType == eQuery.mental)
                     {
+                         mentalAnswersYes++;
                          changeMentalScale(change);
                     }
                     else if (msgType == eQuery.phy)
                     {
+                         physicalAnswerYes++;
                          changePhysicalScale(change);
                     }
                     else
@@ -339,6 +349,17 @@ namespace ASSEA_Logic
                     mainTimer.Stop();
                     decreaseTimer.Stop();
                     updateScales(physicalScale, mentalScale);
+               }
+               else
+               {
+                    if (msgType == eQuery.mental)
+                    {
+                         mentalAnswerNo++;
+                    }
+                    else if (msgType == eQuery.phy)
+                    {
+                         physicalAnswerNo++;
+                    }
                }
           }
 

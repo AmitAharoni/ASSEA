@@ -81,7 +81,10 @@ namespace ASSEA
 
           private void EndShift_OnClick(object sender, System.EventArgs e)
           {
-               System.Environment.Exit(-1);
+               appSetting.endAndShow();
+               Statistics statistics = new Statistics(appSetting);
+               statistics.ShowDialog();
+               this.Close();
           }
 
           private void mentalTrackBar_OnValueChanged(object sender, System.EventArgs e)
