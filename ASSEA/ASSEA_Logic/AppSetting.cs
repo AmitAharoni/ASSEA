@@ -16,6 +16,7 @@ namespace ASSEA_Logic
           private static readonly string sr_File = sr_FileLocation + "\\AppSettings.txt";
           private static System.Timers.Timer mainTimer;
           private static System.Timers.Timer decreaseTimer;
+          private static System.Timers.Timer mealTimer;
           public const int phy = 1;
           public const int ment = 2;
 
@@ -23,6 +24,7 @@ namespace ASSEA_Logic
           /// daily
           /// </summary>
           public int physicalScale { get; set; }
+          public bool onBreak = false;
           public int mentalScale { get; set; } 
           int notificationAnsweredByUser = 0;
 
@@ -30,9 +32,9 @@ namespace ASSEA_Logic
           List<string> mentalMsgs = new List<string> {"Fix your posture", "Do some streches", "Wash your face"};
 
           public string userName { get; set; }
-          public string mealLunch { get; set; }
-          public string mealDinner { get; set; }
-          public string friendlyBreak { get; set; }
+          public DateTime mealLunch { get; set; }
+          public DateTime mealDinner { get; set; }
+          public DateTime friendlyBreak { get; set; }
           public eInterset Interest { get; set; }
           public eNotificationsLevel notificationsLevel { get; set; }
 
@@ -42,9 +44,9 @@ namespace ASSEA_Logic
           {
                CheckFolder();
                userName = username;
-               mealLunch = lunch.ToLongTimeString();
-               mealDinner = dinner.ToLongTimeString();
-               friendlyBreak = friendly.ToLongTimeString();
+               mealLunch = lunch;
+               mealDinner = dinner;
+               friendlyBreak = friendly;
                Interest = interest;
                notificationsLevel = notification;
                physicalScale = 50;
@@ -60,6 +62,8 @@ namespace ASSEA_Logic
                decreaseScalesThread.Start();
                Thread timerThread = new Thread(SetTimer);
                timerThread.Start();
+               Thread mealThread = new Thread(setTimerToMeal);
+               mealThread.Start();
           }
 
           public enum eInterset
@@ -100,7 +104,7 @@ namespace ASSEA_Logic
 
                while (true)
                {
-                    Thread.Sleep(10000);
+                    Thread.Sleep(3000);
                }
           }
 
@@ -145,29 +149,56 @@ namespace ASSEA_Logic
                }
           }
 
+          public void setTimerToMeal()
+          {
+               DateTime time = DateTime.Now;
+               DateTime launchTimeUpdated = new DateTime(time.Year, time.Month, time.Day, mealLunch.Hour, mealLunch.Minute, mealLunch.Second);
+               TimeSpan span = launchTimeUpdated.Subtract(time);
+               int timeDifference = (int)span.TotalMilliseconds;
+
+               mealTimer = new System.Timers.Timer(timeDifference);
+               mealTimer.Elapsed += remindLunch;
+               mealTimer.AutoReset = true;
+               mealTimer.Enabled = true;
+
+               Thread.Sleep(timeDifference+1000);
+          }
+
+          public void remindLunch(object source, ElapsedEventArgs e)
+          {
+               string message = "It's time to eat !";
+               mainTimer.Stop();
+               eQuery query = eQuery.lunchTime;
+
+               doWhenMSGready(message, query);
+
+          }
+
           public void userIdle()
           {
                while (true)
                {
                     TimeSpan idleTime = InputTimer.GetInputIdleTime();
-                    if (idleTime.TotalMinutes >= 10)
+                    if (idleTime.TotalSeconds >= 17) // 10
                     {
                          //send Message and ask if user went to break
-                         while (InputTimer.GetInputIdleTime().Minutes > 1)
+                         while (InputTimer.GetInputIdleTime().TotalSeconds >= 17) // 1
                          {
-                              Thread.Sleep(30000);
-                              continue;
+                              Thread.Sleep(1000);
                          }
 
                          string askIfUserWentToBreak = "Hello, you were idle, did you were on a break?";
-                         doWhenMSGready(askIfUserWentToBreak, eQuery.idle);
+                         if (onBreak == false)
+                         {
+                              doWhenMSGready(askIfUserWentToBreak, eQuery.idle);
+                         }
                     }
                }
           }
 
           public void decreaseScales()
           {
-               decreaseTimer = new System.Timers.Timer(300000);
+               decreaseTimer = new System.Timers.Timer(13000);
                decreaseTimer.Elapsed += decreaseEvent;
                decreaseTimer.AutoReset = true;
                decreaseTimer.Enabled = true;
@@ -184,7 +215,6 @@ namespace ASSEA_Logic
                changeMentalScale(-2);
                changePhysicalScale(-2);
                updateScales(physicalScale, mentalScale);
-
           }
 
           public event Action<int, int> updateScalesNotifier;
@@ -229,7 +259,8 @@ namespace ASSEA_Logic
           {
                phy = 0,
                mental = 1,
-               idle = 2
+               idle = 2,
+               lunchTime = 3
           }
 
           public int selectListMSG()
@@ -281,37 +312,41 @@ namespace ASSEA_Logic
 
           public void receiveAnswer(eQuery msgType, bool userAnswerToMSG)
           {
-               int change;
-               if (msgType == eQuery.mental)
-               {
-                    change = (userAnswerToMSG == true) ? 10 : -10;
-                    changeMentalScale(change);
-               }
-               else if (msgType == eQuery.phy)
-               {
-                    change = (userAnswerToMSG == true) ? 10 : -10;
-                    changePhysicalScale(change);
-               }
-               else
-               {
-                    change = (userAnswerToMSG == true) ? 10 : -10;
-                    changeMentalScale(change);
-                    change = (userAnswerToMSG == true) ? 10 : -10;
-                    changePhysicalScale(change);
-               }
+               int change = 10;
 
                if (userAnswerToMSG == true)
                {
+                    if (msgType == eQuery.mental)
+                    {
+                         changeMentalScale(change);
+                    }
+                    else if (msgType == eQuery.phy)
+                    {
+                         changePhysicalScale(change);
+                    }
+                    else
+                    {
+                         if (msgType == eQuery.lunchTime)
+                         {
+                              change = 20;
+                         }
 
+                         changeMentalScale(change);
+                         changePhysicalScale(change);
+                    }
+
+                    onBreak = true;
                     mainTimer.Stop();
+                    decreaseTimer.Stop();
+                    updateScales(physicalScale, mentalScale);
                }
-
-               updateScales(physicalScale, mentalScale);
           }
 
           public void returnFromBreak()
           {
                mainTimer.Start();
+               decreaseTimer.Start();
+               onBreak = false;
           }
 
           public static bool UserExist()

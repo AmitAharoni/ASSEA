@@ -61,13 +61,13 @@ namespace ASSEA
                this.Header_TextBox.BackColor = System.Drawing.SystemColors.Window;
                this.Header_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
                this.Header_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.Header_TextBox.Location = new System.Drawing.Point(128, 275);
-               this.Header_TextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.Header_TextBox.Location = new System.Drawing.Point(192, 412);
                this.Header_TextBox.Multiline = true;
                this.Header_TextBox.Name = "Header_TextBox";
                this.Header_TextBox.ReadOnly = true;
-               this.Header_TextBox.Size = new System.Drawing.Size(813, 101);
+               this.Header_TextBox.Size = new System.Drawing.Size(1220, 152);
                this.Header_TextBox.TabIndex = 2;
+               this.Header_TextBox.TabStop = false;
                this.Header_TextBox.Text = "Hello, Welcome to ASSEA.\r\n Let\'s set up your application";
                this.Header_TextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
                // 
@@ -75,10 +75,9 @@ namespace ASSEA
                // 
                this.DinnerTime_TimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.DinnerTime_TimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-               this.DinnerTime_TimePicker.Location = new System.Drawing.Point(439, 541);
-               this.DinnerTime_TimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.DinnerTime_TimePicker.Location = new System.Drawing.Point(658, 812);
                this.DinnerTime_TimePicker.Name = "DinnerTime_TimePicker";
-               this.DinnerTime_TimePicker.Size = new System.Drawing.Size(162, 35);
+               this.DinnerTime_TimePicker.Size = new System.Drawing.Size(241, 48);
                this.DinnerTime_TimePicker.TabIndex = 3;
                this.DinnerTime_TimePicker.Value = new System.DateTime(2021, 5, 6, 18, 0, 0, 0);
                // 
@@ -86,10 +85,9 @@ namespace ASSEA
                // 
                this.LunceTime_TimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.LunceTime_TimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-               this.LunceTime_TimePicker.Location = new System.Drawing.Point(439, 473);
-               this.LunceTime_TimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.LunceTime_TimePicker.Location = new System.Drawing.Point(658, 710);
                this.LunceTime_TimePicker.Name = "LunceTime_TimePicker";
-               this.LunceTime_TimePicker.Size = new System.Drawing.Size(162, 35);
+               this.LunceTime_TimePicker.Size = new System.Drawing.Size(241, 48);
                this.LunceTime_TimePicker.TabIndex = 4;
                this.LunceTime_TimePicker.Value = new System.DateTime(2021, 5, 6, 12, 0, 0, 0);
                // 
@@ -98,11 +96,10 @@ namespace ASSEA
                this.textBox1.BackColor = System.Drawing.SystemColors.Window;
                this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
                this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.textBox1.Location = new System.Drawing.Point(128, 405);
-               this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.textBox1.Location = new System.Drawing.Point(192, 608);
                this.textBox1.Name = "textBox1";
                this.textBox1.ReadOnly = true;
-               this.textBox1.Size = new System.Drawing.Size(445, 28);
+               this.textBox1.Size = new System.Drawing.Size(668, 41);
                this.textBox1.TabIndex = 5;
                this.textBox1.Text = "Name : ";
                // 
@@ -115,10 +112,9 @@ namespace ASSEA
                // Username_TextBox
                // 
                this.Username_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.Username_TextBox.Location = new System.Drawing.Point(255, 405);
-               this.Username_TextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.Username_TextBox.Location = new System.Drawing.Point(382, 608);
                this.Username_TextBox.Name = "Username_TextBox";
-               this.Username_TextBox.Size = new System.Drawing.Size(347, 35);
+               this.Username_TextBox.Size = new System.Drawing.Size(518, 48);
                this.Username_TextBox.TabIndex = 7;
                // 
                // textBox3
@@ -126,11 +122,10 @@ namespace ASSEA
                this.textBox3.BackColor = System.Drawing.SystemColors.Window;
                this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
                this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.textBox3.Location = new System.Drawing.Point(128, 473);
-               this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.textBox3.Location = new System.Drawing.Point(192, 710);
                this.textBox3.Name = "textBox3";
                this.textBox3.ReadOnly = true;
-               this.textBox3.Size = new System.Drawing.Size(223, 28);
+               this.textBox3.Size = new System.Drawing.Size(334, 41);
                this.textBox3.TabIndex = 8;
                this.textBox3.Text = "Lunch Start Time :";
                // 
@@ -139,11 +134,10 @@ namespace ASSEA
                this.textBox4.BackColor = System.Drawing.SystemColors.Window;
                this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
                this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.textBox4.Location = new System.Drawing.Point(128, 541);
-               this.textBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.textBox4.Location = new System.Drawing.Point(192, 812);
                this.textBox4.Name = "textBox4";
                this.textBox4.ReadOnly = true;
-               this.textBox4.Size = new System.Drawing.Size(245, 28);
+               this.textBox4.Size = new System.Drawing.Size(368, 41);
                this.textBox4.TabIndex = 9;
                this.textBox4.Text = "Dinner Start Time :";
                // 
@@ -152,11 +146,10 @@ namespace ASSEA
                this.textBox5.BackColor = System.Drawing.SystemColors.Window;
                this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
                this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.textBox5.Location = new System.Drawing.Point(128, 613);
-               this.textBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.textBox5.Location = new System.Drawing.Point(192, 920);
                this.textBox5.Name = "textBox5";
                this.textBox5.ReadOnly = true;
-               this.textBox5.Size = new System.Drawing.Size(257, 28);
+               this.textBox5.Size = new System.Drawing.Size(386, 41);
                this.textBox5.TabIndex = 11;
                this.textBox5.Text = "Friendly Break Time :";
                // 
@@ -164,20 +157,18 @@ namespace ASSEA
                // 
                this.FriendlyTime_TimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.FriendlyTime_TimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-               this.FriendlyTime_TimePicker.Location = new System.Drawing.Point(439, 613);
-               this.FriendlyTime_TimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.FriendlyTime_TimePicker.Location = new System.Drawing.Point(658, 920);
                this.FriendlyTime_TimePicker.Name = "FriendlyTime_TimePicker";
-               this.FriendlyTime_TimePicker.Size = new System.Drawing.Size(162, 35);
+               this.FriendlyTime_TimePicker.Size = new System.Drawing.Size(241, 48);
                this.FriendlyTime_TimePicker.TabIndex = 10;
                this.FriendlyTime_TimePicker.Value = new System.DateTime(2021, 5, 6, 16, 20, 0, 0);
                // 
                // Logo_PictureBox
                // 
                this.Logo_PictureBox.Image = global::ASSEA.Properties.Resources.AppLogo;
-               this.Logo_PictureBox.Location = new System.Drawing.Point(216, 45);
-               this.Logo_PictureBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.Logo_PictureBox.Location = new System.Drawing.Point(324, 68);
                this.Logo_PictureBox.Name = "Logo_PictureBox";
-               this.Logo_PictureBox.Size = new System.Drawing.Size(639, 197);
+               this.Logo_PictureBox.Size = new System.Drawing.Size(958, 296);
                this.Logo_PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
                this.Logo_PictureBox.TabIndex = 1;
                this.Logo_PictureBox.TabStop = false;
@@ -186,10 +177,9 @@ namespace ASSEA
                // 
                this.Soft_RadioButton.AutoSize = true;
                this.Soft_RadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.Soft_RadioButton.Location = new System.Drawing.Point(21, 11);
-               this.Soft_RadioButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.Soft_RadioButton.Location = new System.Drawing.Point(32, 16);
                this.Soft_RadioButton.Name = "Soft_RadioButton";
-               this.Soft_RadioButton.Size = new System.Drawing.Size(80, 33);
+               this.Soft_RadioButton.Size = new System.Drawing.Size(112, 44);
                this.Soft_RadioButton.TabIndex = 13;
                this.Soft_RadioButton.TabStop = true;
                this.Soft_RadioButton.Text = "Soft";
@@ -199,10 +189,9 @@ namespace ASSEA
                // 
                this.Normal_RadioButton.AutoSize = true;
                this.Normal_RadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.Normal_RadioButton.Location = new System.Drawing.Point(124, 11);
-               this.Normal_RadioButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.Normal_RadioButton.Location = new System.Drawing.Point(186, 16);
                this.Normal_RadioButton.Name = "Normal_RadioButton";
-               this.Normal_RadioButton.Size = new System.Drawing.Size(117, 33);
+               this.Normal_RadioButton.Size = new System.Drawing.Size(164, 44);
                this.Normal_RadioButton.TabIndex = 14;
                this.Normal_RadioButton.TabStop = true;
                this.Normal_RadioButton.Text = "Normal";
@@ -212,10 +201,9 @@ namespace ASSEA
                // 
                this.Extreme_RadioButton.AutoSize = true;
                this.Extreme_RadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.Extreme_RadioButton.Location = new System.Drawing.Point(255, 11);
-               this.Extreme_RadioButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.Extreme_RadioButton.Location = new System.Drawing.Point(382, 16);
                this.Extreme_RadioButton.Name = "Extreme_RadioButton";
-               this.Extreme_RadioButton.Size = new System.Drawing.Size(127, 33);
+               this.Extreme_RadioButton.Size = new System.Drawing.Size(182, 44);
                this.Extreme_RadioButton.TabIndex = 15;
                this.Extreme_RadioButton.TabStop = true;
                this.Extreme_RadioButton.Text = "Extreme";
@@ -226,11 +214,10 @@ namespace ASSEA
                this.textBox6.BackColor = System.Drawing.SystemColors.Window;
                this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
                this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.textBox6.Location = new System.Drawing.Point(128, 679);
-               this.textBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.textBox6.Location = new System.Drawing.Point(192, 1018);
                this.textBox6.Name = "textBox6";
                this.textBox6.ReadOnly = true;
-               this.textBox6.Size = new System.Drawing.Size(257, 28);
+               this.textBox6.Size = new System.Drawing.Size(386, 41);
                this.textBox6.TabIndex = 16;
                this.textBox6.Text = "Notifications Frequency : ";
                // 
@@ -243,10 +230,9 @@ namespace ASSEA
             "News",
             "Music",
             "All"});
-               this.Interests_ComboBox.Location = new System.Drawing.Point(439, 745);
-               this.Interests_ComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.Interests_ComboBox.Location = new System.Drawing.Point(658, 1118);
                this.Interests_ComboBox.Name = "Interests_ComboBox";
-               this.Interests_ComboBox.Size = new System.Drawing.Size(162, 37);
+               this.Interests_ComboBox.Size = new System.Drawing.Size(241, 48);
                this.Interests_ComboBox.TabIndex = 17;
                this.Interests_ComboBox.Text = "All";
                // 
@@ -255,11 +241,10 @@ namespace ASSEA
                this.textBox7.BackColor = System.Drawing.SystemColors.Window;
                this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
                this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.textBox7.Location = new System.Drawing.Point(128, 745);
-               this.textBox7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.textBox7.Location = new System.Drawing.Point(192, 1118);
                this.textBox7.Name = "textBox7";
                this.textBox7.ReadOnly = true;
-               this.textBox7.Size = new System.Drawing.Size(257, 28);
+               this.textBox7.Size = new System.Drawing.Size(386, 41);
                this.textBox7.TabIndex = 18;
                this.textBox7.Text = "Interests";
                // 
@@ -269,10 +254,9 @@ namespace ASSEA
                this.Notifications_Panel.Controls.Add(this.Extreme_RadioButton);
                this.Notifications_Panel.Controls.Add(this.Normal_RadioButton);
                this.Notifications_Panel.Controls.Add(this.Soft_RadioButton);
-               this.Notifications_Panel.Location = new System.Drawing.Point(425, 670);
-               this.Notifications_Panel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.Notifications_Panel.Location = new System.Drawing.Point(638, 1005);
                this.Notifications_Panel.Name = "Notifications_Panel";
-               this.Notifications_Panel.Size = new System.Drawing.Size(397, 50);
+               this.Notifications_Panel.Size = new System.Drawing.Size(596, 75);
                this.Notifications_Panel.TabIndex = 20;
                // 
                // Error_TextBox
@@ -281,11 +265,10 @@ namespace ASSEA
                this.Error_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
                this.Error_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.Error_TextBox.ForeColor = System.Drawing.Color.Red;
-               this.Error_TextBox.Location = new System.Drawing.Point(809, 756);
-               this.Error_TextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+               this.Error_TextBox.Location = new System.Drawing.Point(1214, 1134);
                this.Error_TextBox.Name = "Error_TextBox";
                this.Error_TextBox.ReadOnly = true;
-               this.Error_TextBox.Size = new System.Drawing.Size(240, 28);
+               this.Error_TextBox.Size = new System.Drawing.Size(360, 41);
                this.Error_TextBox.TabIndex = 21;
                this.Error_TextBox.Text = "Please enter all fields";
                this.Error_TextBox.Visible = false;
@@ -296,10 +279,10 @@ namespace ASSEA
                this.Submit_Button.FlatAppearance.BorderSize = 0;
                this.Submit_Button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
                this.Submit_Button.Image = global::ASSEA.Properties.Resources.LetsGoButton;
-               this.Submit_Button.Location = new System.Drawing.Point(829, 792);
-               this.Submit_Button.Margin = new System.Windows.Forms.Padding(7, 7, 40, 40);
+               this.Submit_Button.Location = new System.Drawing.Point(1244, 1188);
+               this.Submit_Button.Margin = new System.Windows.Forms.Padding(10, 10, 60, 60);
                this.Submit_Button.Name = "Submit_Button";
-               this.Submit_Button.Size = new System.Drawing.Size(203, 84);
+               this.Submit_Button.Size = new System.Drawing.Size(304, 126);
                this.Submit_Button.TabIndex = 12;
                this.Submit_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
                this.Submit_Button.UseVisualStyleBackColor = true;
@@ -307,12 +290,12 @@ namespace ASSEA
                // 
                // FormFirstEntry
                // 
-               this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
+               this.AutoScaleDimensions = new System.Drawing.SizeF(216F, 216F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
                this.AutoSize = true;
                this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
                this.BackColor = System.Drawing.SystemColors.Window;
-               this.ClientSize = new System.Drawing.Size(1093, 700);
+               this.ClientSize = new System.Drawing.Size(1640, 1050);
                this.Controls.Add(this.Error_TextBox);
                this.Controls.Add(this.Notifications_Panel);
                this.Controls.Add(this.textBox7);
@@ -329,8 +312,7 @@ namespace ASSEA
                this.Controls.Add(this.DinnerTime_TimePicker);
                this.Controls.Add(this.Header_TextBox);
                this.Controls.Add(this.Logo_PictureBox);
-               this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-               this.MinimumSize = new System.Drawing.Size(1115, 697);
+               this.MinimumSize = new System.Drawing.Size(1658, 1006);
                this.Name = "FormFirstEntry";
                this.ShowIcon = false;
                this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

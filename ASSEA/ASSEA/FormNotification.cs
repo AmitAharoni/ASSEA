@@ -4,6 +4,7 @@ using ASSEA_Logic;
 using System.Windows.Forms;
 using System.Threading;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace ASSEA
 {
@@ -12,6 +13,7 @@ namespace ASSEA
           public FormDashboard formDashboard { get; set; }
           private AppSetting.eQuery query;
           private System.Windows.Forms.Timer tmr;
+          private bool SelectYes = false;
 
           public FormNotification(FormDashboard formDashboard, string message, AppSetting.eQuery query)
           {
@@ -21,7 +23,8 @@ namespace ASSEA
                this.query = query;
 
                tmr = new System.Windows.Forms.Timer();
-               tmr.Tick += delegate {
+               tmr.Tick += delegate
+               {
                     this.Close();
                };
                tmr.Interval = (int)TimeSpan.FromMinutes(1).TotalMilliseconds;
@@ -35,15 +38,22 @@ namespace ASSEA
                base.OnLoad(e);
           }
 
-          protected override void OnClosed(EventArgs e)
+          protected override void OnFormClosed(FormClosedEventArgs e)
           {
-               base.OnClosed(e);
+               base.OnFormClosed(e);
+               if (this.SelectYes)
+               {
+                    ReturnFromBreak returnFrom = new ReturnFromBreak(formDashboard.appSetting);
+                    returnFrom.ShowDialog();
+               }
           }
 
           private void yesButton_OnClick(object sender, EventArgs e)
           {
-              this.formDashboard.appSetting.receiveAnswer(query , true);
-              this.Close();
+               this.formDashboard.appSetting.receiveAnswer(query, true);
+               this.SelectYes = true;
+               this.Hide();
+               this.Close();
           }
 
           private void laterButton_OnClick(object sender, EventArgs e)
@@ -53,8 +63,7 @@ namespace ASSEA
 
           private void noButton_OnClick(object sender, EventArgs e)
           {
-               this.formDashboard.appSetting.receiveAnswer(query, true);
-               this.formDashboard.Show();
+               this.formDashboard.appSetting.receiveAnswer(query, false);
                this.Close();
           }
      }

@@ -36,18 +36,18 @@ namespace ASSEA
                base.OnShown(e);
                this.appSetting.msgNotifier += opeNotification;
                this.appSetting.updateScalesNotifier += updateScales;
-               Welcome_TextBox.Text = String.Format("Hi {0}, update your states.", this.appSetting.userName);
+               Welcome_TextBox.Text = String.Format("Hi {0}, you can update your states.", this.appSetting.userName);
           }
 
           public void updateScales(int physical, int mental)
           {
                Invoke(new Action(() =>
                {
-                    if (mental <= 100)
+                    if (mental <= 100 && mental >= 0)
                     {
                          Mental_TrackBar.Value = mental;
                     }
-                    if (physical <= 100)
+                    if (physical <= 100 && physical >= 0)
                     {
                          Physical_TrackBar.Value = physical;
                     }
@@ -67,15 +67,10 @@ namespace ASSEA
 
                if (this.appSetting != null)
                {
+                    this.appSetting.mentalScale = 50;
+                    this.appSetting.physicalScale = 50;
                     this.appSetting.SaveToFile();
                }
-          }
-
-          public FormDashboard(AppSetting appSetting)
-          {
-               InitializeComponent();
-               this.appSetting = appSetting;
-               appSetting.SaveToFile();
           }
 
           private void initSetting()
@@ -86,7 +81,7 @@ namespace ASSEA
 
           private void EndShift_OnClick(object sender, System.EventArgs e)
           {
-               // start last analystic form
+               System.Environment.Exit(-1);
           }
 
           private void mentalTrackBar_OnValueChanged(object sender, System.EventArgs e)
@@ -105,7 +100,7 @@ namespace ASSEA
 
           private void settingsButton_OnClick(object sender, System.EventArgs e)
           {
-               // open settings
+               FormFirstEntry formFirstEntry = new FormFirstEntry(this);
           }
 
      }
