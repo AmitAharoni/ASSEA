@@ -13,6 +13,9 @@ namespace ASSEA_Logic
      {
           // file folder and details
           private static readonly string sr_FileLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\ASSEA";
+          /// <summary>
+          ///appSetting file path is: C:\Users\$UserName\AppData\Roaming\ASSEA
+          /// </summary>
           private static readonly string sr_File = sr_FileLocation + "\\AppSettings.txt";
           private static System.Timers.Timer mainTimer;
           private static System.Timers.Timer decreaseTimer;
@@ -27,8 +30,7 @@ namespace ASSEA_Logic
           public int physicalScale { get; set; }
           public bool onBreak = false;
           public int mentalScale { get; set; } 
-          int notificationAnsweredByUser = 0;
-
+     
           List<string> physicalMsgs = new List<string> {"Snack time", "Drink Something", "Coffee Time"};
           List<string> mentalMsgs = new List<string> {"Close your eyes and breath", "Put your favorite music and relax", "Wash your face to feel better"};
 
@@ -160,9 +162,9 @@ namespace ASSEA_Logic
           public void setTimerToMeal()
           {
                DateTime time = DateTime.Now;
-               DateTime launchTimeUpdated = new DateTime(time.Year, time.Month, time.Day, mealLunch.Hour, mealLunch.Minute, mealLunch.Second);
-               TimeSpan span = launchTimeUpdated.Subtract(time);
+               TimeSpan span = mealLunch.Subtract(time);
                int timeDifference = (int)span.TotalMilliseconds;
+               timeDifference = timeDifference > 0 ? timeDifference : 10000;
 
                mealTimer = new System.Timers.Timer(timeDifference);
                mealTimer.Elapsed += remindLunch;
